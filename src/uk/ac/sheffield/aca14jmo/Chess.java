@@ -13,7 +13,7 @@ public class Chess {
 	private static Board board;
 	private static TextDisplay screen;
 	private static HumanPlayer whitePlayer;
-	private static HumanPlayer blackPlayer;
+	private static RandomPlayer blackPlayer;
 	private static Pieces whitePieces;
 	private static Pieces blackPieces;
 
@@ -45,7 +45,8 @@ public class Chess {
 		blackPieces = new Pieces(board, PieceCode.BLACK);
 
 		whitePlayer = new HumanPlayer("White", whitePieces, board, null, input);
-		blackPlayer = new HumanPlayer("Black", blackPieces, board, null, input);
+		//blackPlayer = new HumanPlayer("Black", blackPieces, board, null, input);
+		blackPlayer = new RandomPlayer("Black", blackPieces, board, null);
 
 		whitePlayer.setOpponent(blackPlayer);
 		blackPlayer.setOpponent(whitePlayer);
@@ -60,7 +61,7 @@ public class Chess {
 			}
 			screen.showPiecesOnBoard(board.getData());
 			if (blackPlayer.makeMove()) {
-				printWin(blackPlayer);
+//				printWin(blackPlayer);
 				break;
 			}
 			screen.showPiecesOnBoard(board.getData());

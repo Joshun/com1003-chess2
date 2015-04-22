@@ -25,7 +25,9 @@ public abstract class ComputerPlayer extends Player{
         int numPieces = pieces.getNumPieces();
         for(int i=0; i<numPieces; i++) {
             pieceMoves = pieces.getPiece(i).availableMoves();
-            possibleMoves.addAll(pieceMoves);
+            if (pieceMoves != null) {
+                possibleMoves.addAll(pieceMoves);
+            }
         }
         return possibleMoves;
     }
