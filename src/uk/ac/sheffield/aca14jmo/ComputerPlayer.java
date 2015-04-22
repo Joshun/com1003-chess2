@@ -28,7 +28,7 @@ public abstract class ComputerPlayer extends Player{
                 possibleMoves.addAll(pieceMoves);
             }
         }
-        DebugLog.println("Possible moves: " + possibleMoves);
+        DebugLog.println("[ComputerPlayer] Possible moves: " + possibleMoves);
 
         return possibleMoves;
     }

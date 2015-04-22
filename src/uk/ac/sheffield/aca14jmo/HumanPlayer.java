@@ -116,7 +116,7 @@ public class HumanPlayer extends Player {
 			else {
 				DebugLog.println("Players move: " + newMove);
 				ArrayList<Move> possibleMoves = currentPiece.availableMoves();
-				DebugLog.println("Possible moves: " + possibleMoves);
+				DebugLog.println("[HumanPlayer] Possible moves: " + possibleMoves);
 				if (possibleMoves != null && possibleMoves.contains(newMove)) {
 					if (capture && board.getPiece(endX, endY) instanceof King) {
 						hasWon = true;
