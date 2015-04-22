@@ -11,12 +11,36 @@ public class RandomPlayer extends ComputerPlayer {
         super(n, p, b, o);
 
     }
+
+    private int getRandom(int max) {
+        return (int)(Math.random() * max);
+    }
+
     public boolean makeMove() {
         Board board = getBoard();
         Pieces pieces = getPieces();
         int colour = pieces.getPiece(0).getColour();
 
+        // Declare an arraylist for all possible moves RandomPlayer could make
         ArrayList<Move> allPossibleMoves = getAllPossibleMoves();
 
+        int size = allPossibleMoves.size();
+        int randomIndex = getRandom(size);
+        Move selectedMove = allPossibleMoves.get(randomIndex);
+
+        // Player has won if it has taken king
+        if (selectedMove.takesPiece()) {
+            int takePieceX = selectedMove.getEndX();
+            int takePieceY = selectedMove.getEndY();
+            Piece takePiece = board.getPiece(takePieceX, takePieceY);
+
+            if (takePiece instanceof King) {
+                setWin();
+            }
+        }
+        selectedMove.execute(getOpponent());
+
+        // Computer player will always make a successful move, so return true
+        return true;
     }
 }

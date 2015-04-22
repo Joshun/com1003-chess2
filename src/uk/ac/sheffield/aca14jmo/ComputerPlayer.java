@@ -6,6 +6,7 @@ import java.util.ArrayList;
  * Created by joshua on 22/04/15.
  */
 public abstract class ComputerPlayer extends Player{
+    private boolean hasWon = false;
     public ComputerPlayer(String n, Pieces p, Board b, Player o) {
         super(n, p, b, o);
 
@@ -27,5 +28,13 @@ public abstract class ComputerPlayer extends Player{
             possibleMoves.addAll(pieceMoves);
         }
         return possibleMoves;
+    }
+
+    public boolean hasWon() {
+        return hasWon;
+    }
+
+    public void setWin() {
+        hasWon = true;
     }
 }
