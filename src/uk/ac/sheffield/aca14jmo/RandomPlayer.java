@@ -35,12 +35,12 @@ public class RandomPlayer extends ComputerPlayer {
             Piece takePiece = board.getPiece(takePieceX, takePieceY);
 
             if (takePiece instanceof King) {
-                setWin();
+                return true;
             }
         }
         selectedMove.execute(getOpponent());
 
-        // Computer player will always make a successful move, so return true
-        return true;
+        // Player hasn't won (yet)
+        return false;
     }
 }
