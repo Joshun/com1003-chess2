@@ -12,12 +12,12 @@ public class Chess {
 	private static Scanner input;
 	private static Board board;
 	private static TextDisplay screen;
-	private static HumanPlayer whitePlayer;
+	private static RandomPlayer whitePlayer;
 	private static RandomPlayer blackPlayer;
 	private static Pieces whitePieces;
 	private static Pieces blackPieces;
 
-	private static void printWin(HumanPlayer p) {
+	private static void printWin(RandomPlayer p) {
 		System.out.println(p.getName() + " has won the game!");
 	}
 
@@ -44,15 +44,13 @@ public class Chess {
 		whitePieces = new Pieces(board, PieceCode.WHITE);
 		blackPieces = new Pieces(board, PieceCode.BLACK);
 
-		whitePlayer = new HumanPlayer("White", whitePieces, board, null, input);
-		//blackPlayer = new HumanPlayer("Black", blackPieces, board, null, input);
-		blackPlayer = new RandomPlayer("Black", blackPieces, board, null);
+		whitePlayer = new RandomPlayer("White", whitePieces, board, null);
+		blackPlayer = new HumanPlayer("Black", blackPieces, board, null, input);
 
 		whitePlayer.setOpponent(blackPlayer);
 		blackPlayer.setOpponent(whitePlayer);
 
 		screen.showPiecesOnBoard(board.getData());
-
 
 		while (true) {
 			if (whitePlayer.makeMove()) {
@@ -61,7 +59,7 @@ public class Chess {
 			}
 			screen.showPiecesOnBoard(board.getData());
 			if (blackPlayer.makeMove()) {
-//				printWin(blackPlayer);
+				printWin(blackPlayer);
 				break;
 			}
 			screen.showPiecesOnBoard(board.getData());

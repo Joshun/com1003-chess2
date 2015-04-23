@@ -5,13 +5,19 @@ import java.util.ArrayList;
 /**
  * Created by joshua on 22/04/15.
  */
-public abstract class ComputerPlayer extends Player{
+public abstract class ComputerPlayer extends Player {
+    private String name;
+
     public ComputerPlayer(String n, Pieces p, Board b, Player o) {
         super(n, p, b, o);
-
+        name = n;
     }
 
     public abstract boolean makeMove();
+
+    public String getName() {
+        return name;
+    }
 
     public ArrayList<Move> getAllPossibleMoves() {
         Board board = getBoard();
