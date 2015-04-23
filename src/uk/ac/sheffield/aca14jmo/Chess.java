@@ -17,10 +17,6 @@ public class Chess {
 	private static Pieces whitePieces;
 	private static Pieces blackPieces;
 
-	private static void printWin(RandomPlayer p) {
-		System.out.println(p.getName() + " has won the game!");
-	}
-
 	private static void processArgs(String[] args) {
 		for(int i=0; i<args.length; i++) {
 			if (args[i].equals("--debug")) {
@@ -54,12 +50,12 @@ public class Chess {
 
 		while (true) {
 			if (whitePlayer.makeMove()) {
-				printWin(whitePlayer);
+				System.out.println("White has won!");
 				break;
 			}
 			screen.showPiecesOnBoard(board.getData());
 			if (blackPlayer.makeMove()) {
-				printWin(blackPlayer);
+				System.out.println("Black has won!");
 				break;
 			}
 			screen.showPiecesOnBoard(board.getData());
