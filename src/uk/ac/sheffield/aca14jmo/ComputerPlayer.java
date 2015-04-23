@@ -3,7 +3,9 @@ package uk.ac.sheffield.aca14jmo;
 import java.util.ArrayList;
 
 /**
- * Created by joshua on 22/04/15.
+ * uk.ac.sheffield.aca14jmo.ComputerPlayer.java
+ *
+ * Abstract class to represent a computer player providing common functionality
  */
 public abstract class ComputerPlayer extends Player {
     private String name;
@@ -19,7 +21,7 @@ public abstract class ComputerPlayer extends Player {
         return name;
     }
 
-    protected int getRandom(int max) {
+    protected static int getRandom(int max) {
         return (int)(Math.random() * max);
     }
 

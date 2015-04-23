@@ -3,7 +3,9 @@ package uk.ac.sheffield.aca14jmo;
 import java.util.ArrayList;
 
 /**
- * Created by joshua on 22/04/15.
+ * uk.ac.sheffield.aca14jmo.AggressivePlayer.java
+ *
+ * Class to represent an aggressive player making decisions based on piece value
  */
 public class AggressivePlayer extends ComputerPlayer {
     public AggressivePlayer(String n, Pieces p, Board b, Player o) {

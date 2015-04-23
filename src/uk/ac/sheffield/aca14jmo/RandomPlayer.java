@@ -4,7 +4,9 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
- * Created by joshua on 22/04/15.
+ * uk.ac.sheffield.aca14jmo.RandomPlayer.java
+ *
+ * Class to represent a player that randomly picks a move from all possible moves
  */
 public class RandomPlayer extends ComputerPlayer {
     public RandomPlayer(String n, Pieces p, Board b, Player o) {

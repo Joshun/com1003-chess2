@@ -12,8 +12,8 @@ public class Chess {
 	private static Scanner input;
 	private static Board board;
 	private static TextDisplay screen;
-	private static RandomPlayer whitePlayer;
-	private static HumanPlayer blackPlayer;
+	private static AggressivePlayer whitePlayer;
+	private static RandomPlayer blackPlayer;
 	private static Pieces whitePieces;
 	private static Pieces blackPieces;
 
@@ -40,8 +40,8 @@ public class Chess {
 		whitePieces = new Pieces(board, PieceCode.WHITE);
 		blackPieces = new Pieces(board, PieceCode.BLACK);
 
-		whitePlayer = new RandomPlayer("White", whitePieces, board, null);
-		blackPlayer = new HumanPlayer("Black", blackPieces, board, null, input);
+		whitePlayer = new AggressivePlayer("White", whitePieces, board, null);
+		blackPlayer = new RandomPlayer("Black", blackPieces, board, null);
 
 		whitePlayer.setOpponent(blackPlayer);
 		blackPlayer.setOpponent(whitePlayer);
