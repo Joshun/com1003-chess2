@@ -42,4 +42,17 @@ public abstract class ComputerPlayer extends Player {
 
         return possibleMoves;
     }
+
+    protected boolean hasWon(Move m) {
+        if (m.takesPiece()) {
+            int takePieceX = m.getEndX();
+            int takePieceY = m.getEndY();
+            Piece takePiece = getBoard().getPiece(takePieceX, takePieceY);
+
+            return takePiece instanceof King;
+        }
+        else {
+            return false;
+        }
+    }
 }

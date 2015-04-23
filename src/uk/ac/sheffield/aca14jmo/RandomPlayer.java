@@ -24,19 +24,9 @@ public class RandomPlayer extends ComputerPlayer {
         int randomIndex = getRandom(size);
         Move selectedMove = allPossibleMoves.get(randomIndex);
 
-        // Player has won if it has taken king
-        if (selectedMove.takesPiece()) {
-            int takePieceX = selectedMove.getEndX();
-            int takePieceY = selectedMove.getEndY();
-            Piece takePiece = board.getPiece(takePieceX, takePieceY);
-
-            if (takePiece instanceof King) {
-                return true;
-            }
-        }
         selectedMove.execute(getOpponent());
 
         // Player hasn't won (yet)
-        return false;
+        return hasWon(selectedMove);
     }
 }

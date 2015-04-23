@@ -50,6 +50,8 @@ public class AggressivePlayer extends ComputerPlayer {
             moveToMake = takeMove;
         }
 
-        return true;
+        moveToMake.execute(getOpponent());
+
+        return hasWon(moveToMake);
     }
 }
