@@ -13,7 +13,7 @@ public class Chess {
 	private static Board board;
 	private static TextDisplay screen;
 	private static RandomPlayer whitePlayer;
-	private static RandomPlayer blackPlayer;
+	private static HumanPlayer blackPlayer;
 	private static Pieces whitePieces;
 	private static Pieces blackPieces;
 
