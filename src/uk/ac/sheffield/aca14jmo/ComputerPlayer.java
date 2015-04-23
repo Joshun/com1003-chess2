@@ -19,6 +19,10 @@ public abstract class ComputerPlayer extends Player {
         return name;
     }
 
+    protected int getRandom(int max) {
+        return (int)(Math.random() * max);
+    }
+
     public ArrayList<Move> getAllPossibleMoves() {
         Board board = getBoard();
         Pieces pieces = getPieces();

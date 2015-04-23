@@ -12,10 +12,6 @@ public class RandomPlayer extends ComputerPlayer {
 
     }
 
-    private int getRandom(int max) {
-        return (int)(Math.random() * max);
-    }
-
     public boolean makeMove() {
         Board board = getBoard();
         Pieces pieces = getPieces();
