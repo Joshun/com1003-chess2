@@ -31,7 +31,7 @@ public class Chess {
 		}
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args)  throws InterruptedException {
 		processArgs(args);
 		input = new Scanner(System.in);
 		board = new Board();
@@ -48,18 +48,7 @@ public class Chess {
 
 		screen.showPiecesOnBoard(board.getData());
 
-		while (true) {
-			if (whitePlayer.makeMove()) {
-				System.out.println("White has won!");
-				break;
-			}
-			screen.showPiecesOnBoard(board.getData());
-			if (blackPlayer.makeMove()) {
-				System.out.println("Black has won!");
-				break;
-			}
-			screen.showPiecesOnBoard(board.getData());
-		}
+		GraphicalDisplay display = new GraphicalDisplay();
 
 	}
 
