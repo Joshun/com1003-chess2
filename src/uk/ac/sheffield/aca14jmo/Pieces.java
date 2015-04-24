@@ -141,7 +141,7 @@ public class Pieces {
 
   public void delete(Piece p) {
     boolean removed = data.remove(p);
-    if (!removed) System.out.println("error");
+    if (!removed) System.out.println("error" + p);
   }
 
   public String toString () {

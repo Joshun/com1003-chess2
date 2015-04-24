@@ -46,15 +46,17 @@ public class Move {
 	public void execute(Player opponent) {
 		Pieces opponentPieces = opponent.getPieces();
 		Board b = piece.getBoard();
+		// Remove from opponent's pieces
+		if (takesPiece) {
+			Piece opponentsPiece = b.getPiece(endX, endY);
+			opponentPieces.delete(opponentsPiece);
+		}
 		piece.setPosition(endX, endY);
 		// Set new coordinates to point to piece object
 		b.setPosition(endX, endY, piece);
 		// Remove from old coordinates
 		b.remove(startX, startY);
-		// Remove from opponent's pieces
-		if (takesPiece) {
-			opponentPieces.delete(piece);
-		}
+
 	}
 
 	public boolean equals(Object obj2) {
