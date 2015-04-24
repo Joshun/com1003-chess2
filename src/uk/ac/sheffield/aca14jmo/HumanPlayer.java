@@ -78,7 +78,7 @@ public class HumanPlayer extends Player {
 			return false;
 		}
 		else {
-			getHumanPlayerState().setSuccessful();
+			humanPlayerState.setSuccessful();
 		}
 		return hasWon;
 	}

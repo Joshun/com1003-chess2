@@ -39,7 +39,7 @@ public class GraphicalDisplay extends JFrame implements Display {
             System.out.println("Button clicked: " + x + "," + y);
 
             humanPlayerState.click(x, y);
-            Chess.processMoves(x, y);
+            Chess.processMoves(x, BOARD_HEIGHT-y);
         }
     }
 
@@ -49,7 +49,7 @@ public class GraphicalDisplay extends JFrame implements Display {
         setSize(WIDTH, HEIGHT);
         Container contentPane = getContentPane();
         contentPane.setLayout(new GridLayout(BOARD_WIDTH, BOARD_HEIGHT));
-        for (int i=0; i<BOARD_HEIGHT; i++) {
+        for (int i=BOARD_HEIGHT-1; i>=0; i--) {
             for (int j=0; j<BOARD_WIDTH; j++) {
                 JButton button = new JButton("x");
                 button.addActionListener(new ButtonHandler());
@@ -61,11 +61,11 @@ public class GraphicalDisplay extends JFrame implements Display {
         setVisible(true);
     }
     public void showPiecesOnBoard(Piece[][] data) {
-        for (int i=0; i<data.length; i++) {
+        for (int i=data.length-1; i>=0; i--) {
             for (int j=0; j<data.length; j++) {
                 char buttonText;
-                if (data[i][j] != null) {
-                    buttonText = data[i][j].getChar();
+                if (data[j][i] != null) {
+                    buttonText = data[j][i].getChar();
                 }
                 else {
                     buttonText = '-';

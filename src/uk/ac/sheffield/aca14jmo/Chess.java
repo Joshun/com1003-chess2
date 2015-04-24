@@ -42,11 +42,10 @@ public class Chess {
 			int playerEndX = humanPlayerState.getEndX();
 			int playerEndY = humanPlayerState.getEndY();
 
-			if (humanPlayerState.getSuccessful()) {
-				whitePlayer.makeMove(playerStartX, playerStartY, playerEndX, playerEndY);
-				System.out.println(humanPlayerState);
-			}
-			else {
+			whitePlayer.makeMove(playerStartX, playerStartY, playerEndX, playerEndY);
+
+			if (!humanPlayerState.getSuccessful()) {
+				System.out.println("Move failed.");
 				humanPlayerState.reset();
 				return;
 			}

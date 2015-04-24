@@ -9,7 +9,7 @@ public class HumanPlayerState {
     private int endX;
     private int endY;
     private ClickState clickState;
-    private boolean successful;
+    private boolean successful = false;
 
     public HumanPlayerState() {
         startX = 0;
@@ -17,7 +17,6 @@ public class HumanPlayerState {
         endX = 0;
         endY = 0;
         clickState = ClickState.INITIAL;
-        successful = false;
     }
 
     public void click(int x, int y) {
@@ -49,12 +48,16 @@ public class HumanPlayerState {
         return endY;
     }
 
+    public boolean getSuccessful() {
+        return successful;
+    }
+
     public ClickState getClickState() {
         return clickState;
     }
 
-    public boolean getSuccessful() {
-        return successful;
+    public void setSuccessful() {
+        successful = true;
     }
 
     public void reset() {
@@ -62,11 +65,7 @@ public class HumanPlayerState {
         successful = false;
     }
 
-    public void setSuccessful() {
-        successful = true;
-    }
-
     public String toString() {
-        return "[" + startX + "," + startY + "] ->" + " [" + endX + "," + endY + "]" + "successful: " + successful + " clickstate: " + clickState;
+        return "[" + startX + "," + startY + "] ->" + " [" + endX + "," + endY + "]" + " clickstate: " + clickState;
     }
 }
