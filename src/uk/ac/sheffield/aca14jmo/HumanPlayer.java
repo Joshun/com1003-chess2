@@ -74,7 +74,12 @@ public class HumanPlayer extends Player {
 	}
 
 	public boolean makeMove(int startX, int startY, int endX, int endY) {
-		processMove(startX, startY, endX, endY);
+		if (!processMove(startX, startY, endX, endY)) {
+			return false;
+		}
+		else {
+			getHumanPlayerState().setSuccessful();
+		}
 		return hasWon;
 	}
 

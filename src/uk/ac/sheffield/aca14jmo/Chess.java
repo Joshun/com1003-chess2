@@ -17,6 +17,7 @@ public class Chess {
 	private static Pieces whitePieces;
 	private static Pieces blackPieces;
 	private static HumanPlayerState humanPlayerState;
+	private static GraphicalDisplay display;
 
 	private static void processArgs(String[] args) {
 		for(int i=0; i<args.length; i++) {
@@ -34,14 +35,25 @@ public class Chess {
 
 	public static void processMoves(int playerX, int playerY) {
 		if (humanPlayerState.getClickState() == ClickState.CLICK_END) {
+			System.out.println("Attempting move...");
+			System.out.println(humanPlayerState);
 			int playerStartX = humanPlayerState.getStartX();
 			int playerStartY = humanPlayerState.getStartY();
 			int playerEndX = humanPlayerState.getEndX();
 			int playerEndY = humanPlayerState.getEndY();
 
-			whitePlayer.makeMove(playerStartX, playerStartY, playerEndX, playerEndY);
+			if (humanPlayerState.getSuccessful()) {
+				whitePlayer.makeMove(playerStartX, playerStartY, playerEndX, playerEndY);
+				System.out.println(humanPlayerState);
+			}
+			else {
+				humanPlayerState.reset();
+				return;
+			}
+			display.showPiecesOnBoard(board.getData());
 			humanPlayerState.reset();
 			blackPlayer.makeMove();
+			display.showPiecesOnBoard(board.getData());
 		}
 	}
 
@@ -65,7 +77,8 @@ public class Chess {
 		screen.showPiecesOnBoard(board.getData());
 
 
-		GraphicalDisplay display = new GraphicalDisplay();
+		display = new GraphicalDisplay(humanPlayerState);
+		display.showPiecesOnBoard(board.getData());
 
 	}
 
