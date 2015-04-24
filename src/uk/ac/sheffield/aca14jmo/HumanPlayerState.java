@@ -4,32 +4,30 @@ package uk.ac.sheffield.aca14jmo;
  * Created by joshua on 24/04/15.
  */
 public class HumanPlayerState {
-    enum CLICK_STATE { START, END };
-
     private int startX;
     private int startY;
     private int endX;
     private int endY;
-    private CLICK_STATE clickState;
+    private ClickState clickState;
 
     public HumanPlayerState() {
         startX = 0;
         startY = 0;
         endX = 0;
         endY = 0;
-        clickState = CLICK_STATE.START;
+        clickState = ClickState.INITIAL;
     }
 
     public void click(int x, int y) {
-        if (clickState == CLICK_STATE.START) {
+        if (clickState == ClickState.INITIAL) {
             startX = x;
             startY = y;
-            clickState = CLICK_STATE.END;
+            clickState = ClickState.CLICK_START;
         }
-        else if (clickState == CLICK_STATE.END) {
+        else if (clickState == ClickState.CLICK_START) {
             endX = x;
             endY = y;
-            clickState = CLICK_STATE.START;
+            clickState = ClickState.CLICK_END;
         }
     }
 
@@ -47,5 +45,13 @@ public class HumanPlayerState {
 
     public int getEndY() {
         return endY;
+    }
+
+    public ClickState getClickState() {
+        return clickState;
+    }
+
+    public void reset() {
+        clickState = ClickState.INITIAL;
     }
 }

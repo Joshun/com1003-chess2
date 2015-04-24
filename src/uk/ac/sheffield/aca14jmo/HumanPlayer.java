@@ -13,11 +13,14 @@ public class HumanPlayer extends Player {
 	private Scanner input;
 	private String name;
 	private boolean hasWon;
+	private HumanPlayerState humanPlayerState;
+
 	public HumanPlayer(String n, Pieces p, Board b, Player o, Scanner input) {
 		super(n, p, b, o);
 		this.input = input;
 		this.name = n;
 		this.hasWon = false;
+		this.humanPlayerState = new HumanPlayerState();
 	}
 
 	private int letterToNumber(char c) {
@@ -68,6 +71,11 @@ public class HumanPlayer extends Player {
 		} while (inputHasErrors);
 
 		return new int[]{letterToNumber(c1)-1, Integer.parseInt(Character.toString(c2))-1};
+	}
+
+	public boolean makeMove(int startX, int startY, int endX, int endY) {
+		processMove(startX, startY, endX, endY);
+		return hasWon;
 	}
 
 	public boolean makeMove() {
@@ -132,6 +140,10 @@ public class HumanPlayer extends Player {
 
 	public String getName() {
 		return name;
+	}
+
+	public HumanPlayerState getHumanPlayerState() {
+		return humanPlayerState;
 	}
 
 	public static void main(String[] args) {

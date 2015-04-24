@@ -12,10 +12,11 @@ public class Chess {
 	private static Scanner input;
 	private static Board board;
 	private static TextDisplay screen;
-	private static AggressivePlayer whitePlayer;
+	private static HumanPlayer whitePlayer;
 	private static RandomPlayer blackPlayer;
 	private static Pieces whitePieces;
 	private static Pieces blackPieces;
+	private static HumanPlayerState humanPlayerState;
 
 	private static void processArgs(String[] args) {
 		for(int i=0; i<args.length; i++) {
@@ -31,6 +32,19 @@ public class Chess {
 		}
 	}
 
+	public static void processMoves(int playerX, int playerY) {
+		if (humanPlayerState.getClickState() == ClickState.CLICK_END) {
+			int playerStartX = humanPlayerState.getStartX();
+			int playerStartY = humanPlayerState.getStartY();
+			int playerEndX = humanPlayerState.getEndX();
+			int playerEndY = humanPlayerState.getEndY();
+
+			whitePlayer.makeMove(playerStartX, playerStartY, playerEndX, playerEndY);
+			humanPlayerState.reset();
+			blackPlayer.makeMove();
+		}
+	}
+
 	public static void main(String[] args)  throws InterruptedException {
 		processArgs(args);
 		input = new Scanner(System.in);
@@ -40,13 +54,16 @@ public class Chess {
 		whitePieces = new Pieces(board, PieceCode.WHITE);
 		blackPieces = new Pieces(board, PieceCode.BLACK);
 
-		whitePlayer = new AggressivePlayer("White", whitePieces, board, null);
+		whitePlayer = new HumanPlayer("White", whitePieces, board, null, input);
 		blackPlayer = new RandomPlayer("Black", blackPieces, board, null);
 
 		whitePlayer.setOpponent(blackPlayer);
 		blackPlayer.setOpponent(whitePlayer);
 
+		humanPlayerState = whitePlayer.getHumanPlayerState();
+
 		screen.showPiecesOnBoard(board.getData());
+
 
 		GraphicalDisplay display = new GraphicalDisplay();
 
