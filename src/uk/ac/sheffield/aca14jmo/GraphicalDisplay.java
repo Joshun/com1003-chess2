@@ -57,6 +57,7 @@ public class GraphicalDisplay extends JFrame implements Display {
                 buttons[i][j] = button;
             }
         }
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }
     public void showPiecesOnBoard(Piece[][] data) {
