@@ -43,6 +43,7 @@ public class Chess {
 		if (player instanceof HumanPlayer) {
 			HumanPlayer humanPlayer = (HumanPlayer)player;
 			if (humanPlayer.makeMove(startX, startY, endX, endY)) {
+				System.out.println("win");
 				gameEnded();
 			}
 			if (humanPlayer.getMoveSuccessful()) {
@@ -54,6 +55,7 @@ public class Chess {
 		}
 		else {
 			if (player.makeMove()) {
+				System.out.println("win");
 				gameEnded();
 			}
 			return true;
@@ -65,7 +67,7 @@ public class Chess {
 			if (makePlayerMove(whitePlayer, startX, startY, endX, endY)) {
 				System.out.println("White\'s move success!");
 				if (! (blackPlayer instanceof HumanPlayer)) {
-					blackPlayer.makeMove();
+					makePlayerMove(blackPlayer, 0, 0, 0, 0);
 				}
 				else {
 					whiteTurn = false;
@@ -77,7 +79,7 @@ public class Chess {
 			if (makePlayerMove(blackPlayer, startX, startY, endX, endY)) {
 				System.out.println("Black\'s move success!");
 				if (! (whitePlayer instanceof HumanPlayer)) {
-					whitePlayer.makeMove();
+					makePlayerMove(whitePlayer, 0, 0, 0, 0);
 				}
 				else {
 					whiteTurn = true;

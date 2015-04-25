@@ -52,7 +52,7 @@ public abstract class ComputerPlayer extends Player {
             Piece takePiece = getBoard().getPiece(takePieceX, takePieceY);
 
             if (takePiece instanceof King) {
-                System.out.println(name + "has won.");
+                System.out.println(name + " has won.");
             }
 
             return takePiece instanceof King;

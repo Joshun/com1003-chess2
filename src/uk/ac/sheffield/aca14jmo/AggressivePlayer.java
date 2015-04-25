@@ -57,7 +57,7 @@ public class AggressivePlayer extends ComputerPlayer {
 
         System.out.println(moveToMake);
         System.out.println(getBoard().getPiece(moveToMake.getEndX(), moveToMake.getEndY()));
-        System.out.println("win?: " + hasWon(moveToMake));
+        System.out.println("win?: " + win);
         return win;
     }
 }
