@@ -9,6 +9,10 @@ import java.awt.event.ActionListener;
  * Created by joshua on 22/04/15.
  */
 public class GraphicalDisplay extends JFrame implements Display {
+    public enum ClickState {
+        INITIAL, CLICK_START, CLICK_END;
+    }
+
     public final static int WIDTH = 800;
     public final static int HEIGHT = 600;
     public static final int BOARD_WIDTH = 8;
