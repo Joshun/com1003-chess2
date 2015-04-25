@@ -34,8 +34,13 @@ public class Chess {
 		}
 	}
 
-	public static void gameEnded() {
-		System.out.println((whiteTurn ? "White" : "Black") + "has won the game!");
+	public static void gameEnded(Player p) {
+		if (p instanceof HumanPlayer) {
+			System.out.println(((HumanPlayer) p).getName() + "has won the game!");
+		}
+		else {
+			System.out.println(((ComputerPlayer)p).getName() + "has won the game!");
+		}
 		System.exit(0);
 	}
 
@@ -43,8 +48,7 @@ public class Chess {
 		if (player instanceof HumanPlayer) {
 			HumanPlayer humanPlayer = (HumanPlayer)player;
 			if (humanPlayer.makeMove(startX, startY, endX, endY)) {
-				System.out.println("win");
-				gameEnded();
+				gameEnded(humanPlayer);
 			}
 			if (humanPlayer.getMoveSuccessful()) {
 				return true;
@@ -55,8 +59,7 @@ public class Chess {
 		}
 		else {
 			if (player.makeMove()) {
-				System.out.println("win");
-				gameEnded();
+				gameEnded(player);
 			}
 			return true;
 		}
