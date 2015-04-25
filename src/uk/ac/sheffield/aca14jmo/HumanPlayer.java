@@ -133,6 +133,7 @@ public class HumanPlayer extends Player {
 				DebugLog.println("[HumanPlayer] Possible moves: " + possibleMoves);
 				if (possibleMoves != null && possibleMoves.contains(newMove)) {
 					if (capture && board.getPiece(endX, endY) instanceof King) {
+						System.out.println(name + "has won.");
 						hasWon = true;
 					}
 					newMove.execute(getOpponent());

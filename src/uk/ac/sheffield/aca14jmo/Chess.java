@@ -18,6 +18,7 @@ public class Chess {
 	private static Pieces blackPieces;
 	private static GraphicalDisplay display;
 	private static boolean whiteTurn = true;
+	private static boolean endGame = false;
 
 	private static void processArgs(String[] args) {
 		for(int i=0; i<args.length; i++) {
@@ -33,10 +34,17 @@ public class Chess {
 		}
 	}
 
+	public static void gameEnded() {
+		System.out.println((whiteTurn ? "White" : "Black") + "has won the game!");
+		System.exit(0);
+	}
+
 	public static boolean makePlayerMove(Player player, int startX, int startY, int endX, int endY) {
 		if (player instanceof HumanPlayer) {
 			HumanPlayer humanPlayer = (HumanPlayer)player;
-			humanPlayer.makeMove(startX, startY, endX, endY);
+			if (humanPlayer.makeMove(startX, startY, endX, endY)) {
+				gameEnded();
+			}
 			if (humanPlayer.getMoveSuccessful()) {
 				return true;
 			}
@@ -45,7 +53,9 @@ public class Chess {
 			}
 		}
 		else {
-			player.makeMove();
+			if (player.makeMove()) {
+				gameEnded();
+			}
 			return true;
 		}
 	}
@@ -88,7 +98,8 @@ public class Chess {
 		blackPieces = new Pieces(board, PieceCode.BLACK);
 
 		whitePlayer = new HumanPlayer("White", whitePieces, board, null, input);
-		blackPlayer = new HumanPlayer("Black", blackPieces, board, null, input);
+//		blackPlayer = new HumanPlayer("Black", blackPieces, board, null, input);
+		blackPlayer = new AggressivePlayer("Black", blackPieces, board, null);
 
 		whitePlayer.setOpponent(blackPlayer);
 		blackPlayer.setOpponent(whitePlayer);
