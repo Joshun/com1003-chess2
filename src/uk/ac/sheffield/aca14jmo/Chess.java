@@ -12,12 +12,12 @@ public class Chess {
 	private static Scanner input;
 	private static Board board;
 	private static TextDisplay screen;
-	private static HumanPlayer whitePlayer;
-	private static AggressivePlayer blackPlayer;
+	private static Player whitePlayer;
+	private static Player blackPlayer;
 	private static Pieces whitePieces;
 	private static Pieces blackPieces;
-	private static HumanPlayerState humanPlayerState;
 	private static GraphicalDisplay display;
+	private static boolean whiteTurn = true;
 
 	private static void processArgs(String[] args) {
 		for(int i=0; i<args.length; i++) {
@@ -33,28 +33,50 @@ public class Chess {
 		}
 	}
 
-	public static void processMoves(int playerX, int playerY) {
-		if (humanPlayerState.getClickState() == ClickState.CLICK_END) {
-			System.out.println("Attempting move...");
-			System.out.println(humanPlayerState);
-			int playerStartX = humanPlayerState.getStartX();
-			int playerStartY = humanPlayerState.getStartY();
-			int playerEndX = humanPlayerState.getEndX();
-			int playerEndY = humanPlayerState.getEndY();
-
-			whitePlayer.makeMove(playerStartX, playerStartY, playerEndX, playerEndY);
-
-			if (!humanPlayerState.getSuccessful()) {
-				System.out.println("Move failed.");
-				humanPlayerState.reset();
-				return;
+	public static boolean makePlayerMove(Player player, int startX, int startY, int endX, int endY) {
+		if (player instanceof HumanPlayer) {
+			HumanPlayer humanPlayer = (HumanPlayer)player;
+			humanPlayer.makeMove(startX, startY, endX, endY);
+			if (humanPlayer.getMoveSuccessful()) {
+				return true;
 			}
-			display.showPiecesOnBoard(board.getData());
-			humanPlayerState.reset();
-			blackPlayer.makeMove();
-			display.showPiecesOnBoard(board.getData());
+			else {
+				return false;
+			}
+		}
+		else {
+			player.makeMove();
+			return true;
 		}
 	}
+
+	public static void makeMove(int startX, int startY, int endX, int endY) {
+		if (whiteTurn) {
+			if (makePlayerMove(whitePlayer, startX, startY, endX, endY)) {
+				System.out.println("White\'s move success!");
+				if (! (blackPlayer instanceof HumanPlayer)) {
+					blackPlayer.makeMove();
+				}
+				else {
+					whiteTurn = false;
+				}
+			}
+			display.showPiecesOnBoard(board.getData());
+		}
+		else {
+			if (makePlayerMove(blackPlayer, startX, startY, endX, endY)) {
+				System.out.println("Black\'s move success!");
+				if (! (whitePlayer instanceof HumanPlayer)) {
+					whitePlayer.makeMove();
+				}
+				else {
+					whiteTurn = true;
+				}
+				display.showPiecesOnBoard(board.getData());
+			}
+		}
+	}
+
 
 	public static void main(String[] args)  throws InterruptedException {
 		processArgs(args);
@@ -66,17 +88,15 @@ public class Chess {
 		blackPieces = new Pieces(board, PieceCode.BLACK);
 
 		whitePlayer = new HumanPlayer("White", whitePieces, board, null, input);
-		blackPlayer = new AggressivePlayer("Black", blackPieces, board, null);
+		blackPlayer = new HumanPlayer("Black", blackPieces, board, null, input);
 
 		whitePlayer.setOpponent(blackPlayer);
 		blackPlayer.setOpponent(whitePlayer);
 
-		humanPlayerState = whitePlayer.getHumanPlayerState();
-
 		screen.showPiecesOnBoard(board.getData());
 
 
-		display = new GraphicalDisplay(humanPlayerState);
+		display = new GraphicalDisplay();
 		display.showPiecesOnBoard(board.getData());
 
 	}

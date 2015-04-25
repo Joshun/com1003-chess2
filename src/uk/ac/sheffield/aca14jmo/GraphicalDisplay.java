@@ -14,7 +14,9 @@ public class GraphicalDisplay extends JFrame implements Display {
     public static final int BOARD_WIDTH = 8;
     public static final int BOARD_HEIGHT = 8;
     private JButton[][] buttons = new JButton[BOARD_WIDTH][BOARD_HEIGHT];
-    private HumanPlayerState humanPlayerState;
+    private ClickState currentState;
+    private int startX, startY;
+    private int endX, endY;
 
     private class ButtonHandler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
@@ -37,14 +39,34 @@ public class GraphicalDisplay extends JFrame implements Display {
                 }
             }
             System.out.println("Button clicked: " + x + "," + y);
-
-            humanPlayerState.click(x, y);
-            Chess.processMoves(x, BOARD_HEIGHT-y);
+            toggleState(x, y);
+            if (currentState == ClickState.CLICK_END) {
+                System.out.println("Click sequence.");
+                Chess.makeMove(startX, startY, endX, endY);
+                resetState();
+            }
         }
     }
 
-    public GraphicalDisplay(HumanPlayerState humanPlayerState) {
-        this.humanPlayerState = humanPlayerState;
+    private void toggleState(int x, int y) {
+        if (currentState == ClickState.INITIAL) {
+            currentState = ClickState.CLICK_START;
+            startX = x;
+            startY = y;
+        }
+        else if (currentState == ClickState.CLICK_START) {
+            currentState = ClickState.CLICK_END;
+            endX = x;
+            endY = y;
+        }
+    }
+
+    private void resetState() {
+        currentState = ClickState.INITIAL;
+    }
+
+    public GraphicalDisplay() {
+        currentState = ClickState.INITIAL;
         setTitle("Chess Game");
         setSize(WIDTH, HEIGHT);
         Container contentPane = getContentPane();
@@ -60,6 +82,7 @@ public class GraphicalDisplay extends JFrame implements Display {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }
+
     public void showPiecesOnBoard(Piece[][] data) {
         for (int i=data.length-1; i>=0; i--) {
             for (int j=0; j<data.length; j++) {
