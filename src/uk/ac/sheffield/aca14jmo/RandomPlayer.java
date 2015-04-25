@@ -26,9 +26,10 @@ public class RandomPlayer extends ComputerPlayer {
         int randomIndex = getRandom(size);
         Move selectedMove = allPossibleMoves.get(randomIndex);
 
+        boolean win = hasWon(selectedMove);
         selectedMove.execute(getOpponent());
 
         // Player hasn't won (yet)
-        return hasWon(selectedMove);
+        return win;
     }
 }
