@@ -29,6 +29,10 @@ public class GraphicalDisplay extends JFrame implements Display {
             int x = source.getXValue();
             int y = source.getYValue();
 
+            source.setBackground(Color.lightGray);
+            source.setBorderPainted(false);
+            source.setOpaque(true);
+
             System.out.println("Button clicked: " + x + "," + y);
             toggleState(x, y);
             if (currentState == ClickState.CLICK_END) {
@@ -108,6 +112,9 @@ public class GraphicalDisplay extends JFrame implements Display {
                     buttonText = '-';
                 }
                 buttons[i][j].setText(String.valueOf(buttonText));
+                buttons[i][j].setBackground(Color.WHITE);
+                buttons[i][j].setBorderPainted(true);
+                buttons[i][j].setOpaque(false);
             }
         }
         TextDisplay tx = new TextDisplay();
