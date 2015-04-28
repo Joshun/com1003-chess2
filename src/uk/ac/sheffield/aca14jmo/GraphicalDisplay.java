@@ -17,7 +17,7 @@ public class GraphicalDisplay extends JFrame implements Display {
     public final static int HEIGHT = 600;
     public static final int BOARD_WIDTH = 8;
     public static final int BOARD_HEIGHT = 8;
-    private JButton[][] buttons = new JButton[BOARD_WIDTH][BOARD_HEIGHT];
+    private ChessButton[][] buttons = new ChessButton[BOARD_WIDTH][BOARD_HEIGHT];
     private ClickState currentState;
     private int startX, startY;
     private int endX, endY;
@@ -25,23 +25,10 @@ public class GraphicalDisplay extends JFrame implements Display {
     private class ButtonHandler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             System.out.println("ButtonHandler event: " + e);
-            JButton source = (JButton)e.getSource();
+            ChessButton source = (ChessButton)e.getSource();
+            int x = source.getXValue();
+            int y = source.getYValue();
 
-            int x=0, y=0;
-            boolean buttonFound = false;
-            for(int i=0; i<BOARD_HEIGHT; i++) {
-                for (int j=0; j<BOARD_WIDTH; j++) {
-                    if (buttonFound) {
-                        break;
-                    }
-                    else if (source == buttons[i][j]) {
-                        x = j;
-                        y = i;
-                        buttonFound = true;
-                        break;
-                    }
-                }
-            }
             System.out.println("Button clicked: " + x + "," + y);
             toggleState(x, y);
             if (currentState == ClickState.CLICK_END) {
@@ -49,6 +36,25 @@ public class GraphicalDisplay extends JFrame implements Display {
                 Chess.makeMove(startX, startY, endX, endY);
                 resetState();
             }
+        }
+    }
+
+    private class ChessButton extends JButton {
+        private int x;
+        private int y;
+
+        public ChessButton(String text, int x, int y) {
+            super(text);
+            this.x = x;
+            this.y = y;
+        }
+
+        public int getXValue() {
+            return x;
+        }
+
+        public int getYValue() {
+            return y;
         }
     }
 
@@ -62,6 +68,7 @@ public class GraphicalDisplay extends JFrame implements Display {
             currentState = ClickState.CLICK_END;
             endX = x;
             endY = y;
+            System.out.println("State: [" + startX + "," + startY + "] -> [" + endX + "," + endY + "]");
         }
     }
 
@@ -75,10 +82,13 @@ public class GraphicalDisplay extends JFrame implements Display {
         setSize(WIDTH, HEIGHT);
         Container contentPane = getContentPane();
         contentPane.setLayout(new GridLayout(BOARD_WIDTH, BOARD_HEIGHT));
+
+        ButtonHandler buttonListener = new ButtonHandler();
+
         for (int i=BOARD_HEIGHT-1; i>=0; i--) {
             for (int j=0; j<BOARD_WIDTH; j++) {
-                JButton button = new JButton("x");
-                button.addActionListener(new ButtonHandler());
+                ChessButton button = new ChessButton("x", j, i);
+                button.addActionListener(buttonListener);
                 contentPane.add(button);
                 buttons[i][j] = button;
             }
@@ -100,6 +110,8 @@ public class GraphicalDisplay extends JFrame implements Display {
                 buttons[i][j].setText(String.valueOf(buttonText));
             }
         }
+        TextDisplay tx = new TextDisplay();
+        tx.showPiecesOnBoard(data);
     }
 
 }

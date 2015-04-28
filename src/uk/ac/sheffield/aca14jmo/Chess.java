@@ -46,6 +46,7 @@ public class Chess {
 
 	public static boolean makePlayerMove(Player player, int startX, int startY, int endX, int endY) {
 		if (player instanceof HumanPlayer) {
+			System.out.println("x: " + startX + " y: " + startY + " x: " + endX + " y: " + endY);
 			HumanPlayer humanPlayer = (HumanPlayer)player;
 			if (humanPlayer.makeMove(startX, startY, endX, endY)) {
 				gameEnded(humanPlayer);
