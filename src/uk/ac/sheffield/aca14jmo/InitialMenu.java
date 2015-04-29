@@ -12,6 +12,8 @@ import java.awt.event.ActionListener;
  */
 public class InitialMenu extends JFrame {
 
+    private GraphicalDisplay graphicalDisplay;
+
     private class MenuButton extends JButton {
         private GameMode gameMode;
         public MenuButton(String text, GameMode gm) {
@@ -27,6 +29,7 @@ public class InitialMenu extends JFrame {
         public void actionPerformed(ActionEvent e) {
             MenuButton source = (MenuButton)e.getSource();
             Chess.startGame(source.getGameMode());
+            InitialMenu.this.setVisible(false);
         }
     }
 
@@ -36,6 +39,14 @@ public class InitialMenu extends JFrame {
             button.addActionListener(buttonListener);
             contentPane.add(button);
         }
+    }
+
+    public void setGraphicalDisplay(GraphicalDisplay d) {
+        this.graphicalDisplay = d;
+    }
+
+    public GraphicalDisplay getGraphicalDisplay() {
+        return graphicalDisplay;
     }
 
     public InitialMenu() {

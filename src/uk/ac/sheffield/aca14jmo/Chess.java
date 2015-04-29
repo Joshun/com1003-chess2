@@ -37,15 +37,26 @@ public class Chess {
 	public static void startGame(GameMode gm) {
 		switch (gm) {
 			case HUMAN_V_AGGRESSIVE:
-				System.out.println("H v AC");
+				whitePlayer = new HumanPlayer("White", whitePieces, board, null, input);
+				blackPlayer = new AggressivePlayer("Black", blackPieces, board, null);
 				break;
 			case HUMAN_V_RANDOM:
-				System.out.println("H v RC");
+				whitePlayer = new HumanPlayer("White", whitePieces, board, null, input);
+				blackPlayer = new AggressivePlayer("Black", blackPieces, board, null);
 				break;
 			case HUMAN_V_HUMAN:
-				System.out.println("H v H");
+				whitePlayer = new HumanPlayer("White", whitePieces, board, null, input);
+				blackPlayer = new HumanPlayer("Black", blackPieces, board, null, input);
 				break;
 		}
+		whitePlayer.setOpponent(blackPlayer);
+		blackPlayer.setOpponent(whitePlayer);
+
+		System.out.println(whitePieces);
+
+		display = new GraphicalDisplay();
+		display.showPiecesOnBoard(board.getData());
+		System.out.println(display);
 	}
 
 	public static void gameEnded(Player p) {
@@ -116,20 +127,21 @@ public class Chess {
 
 		whitePieces = new Pieces(board, PieceCode.WHITE);
 		blackPieces = new Pieces(board, PieceCode.BLACK);
+//
+//		whitePlayer = new HumanPlayer("White", whitePieces, board, null, input);
+////		blackPlayer = new HumanPlayer("Black", blackPieces, board, null, input);
+//		blackPlayer = new AggressivePlayer("Black", blackPieces, board, null);
 
-		whitePlayer = new HumanPlayer("White", whitePieces, board, null, input);
-//		blackPlayer = new HumanPlayer("Black", blackPieces, board, null, input);
-		blackPlayer = new AggressivePlayer("Black", blackPieces, board, null);
+//		whitePlayer.setOpponent(blackPlayer);
+//		blackPlayer.setOpponent(whitePlayer);
 
-		whitePlayer.setOpponent(blackPlayer);
-		blackPlayer.setOpponent(whitePlayer);
-
-		screen.showPiecesOnBoard(board.getData());
+//		screen.showPiecesOnBoard(board.getData());
 
 
 //		display = new GraphicalDisplay();
 //		display.showPiecesOnBoard(board.getData());
 		InitialMenu im = new InitialMenu();
+//		display = im.getGraphicalDisplay();
 
 	}
 
