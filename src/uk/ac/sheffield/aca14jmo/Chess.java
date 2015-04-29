@@ -34,6 +34,20 @@ public class Chess {
 		}
 	}
 
+	public static void startGame(GameMode gm) {
+		switch (gm) {
+			case HUMAN_V_AGGRESSIVE:
+				System.out.println("H v AC");
+				break;
+			case HUMAN_V_RANDOM:
+				System.out.println("H v RC");
+				break;
+			case HUMAN_V_HUMAN:
+				System.out.println("H v H");
+				break;
+		}
+	}
+
 	public static void gameEnded(Player p) {
 		if (p instanceof HumanPlayer) {
 			System.out.println(((HumanPlayer) p).getName() + "has won the game!");
@@ -113,8 +127,9 @@ public class Chess {
 		screen.showPiecesOnBoard(board.getData());
 
 
-		display = new GraphicalDisplay();
-		display.showPiecesOnBoard(board.getData());
+//		display = new GraphicalDisplay();
+//		display.showPiecesOnBoard(board.getData());
+		InitialMenu im = new InitialMenu();
 
 	}
 
