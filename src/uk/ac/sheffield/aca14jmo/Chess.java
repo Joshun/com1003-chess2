@@ -60,13 +60,15 @@ public class Chess {
 	}
 
 	public static void gameEnded(Player p) {
+		String msg;
 		if (p instanceof HumanPlayer) {
-			System.out.println(((HumanPlayer) p).getName() + "has won the game!");
+			msg = ((HumanPlayer) p).getName() + " has won the game!";
 		}
 		else {
-			System.out.println(((ComputerPlayer)p).getName() + "has won the game!");
+			msg = ((HumanPlayer) p).getName() + " has won the game!";
 		}
-		System.exit(0);
+		System.out.println(msg);
+		new WinDialog(msg);
 	}
 
 	public static boolean makePlayerMove(Player player, int startX, int startY, int endX, int endY) {
