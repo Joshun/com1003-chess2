@@ -129,21 +129,8 @@ public class Chess {
 
 		whitePieces = new Pieces(board, PieceCode.WHITE);
 		blackPieces = new Pieces(board, PieceCode.BLACK);
-//
-//		whitePlayer = new HumanPlayer("White", whitePieces, board, null, input);
-////		blackPlayer = new HumanPlayer("Black", blackPieces, board, null, input);
-//		blackPlayer = new AggressivePlayer("Black", blackPieces, board, null);
 
-//		whitePlayer.setOpponent(blackPlayer);
-//		blackPlayer.setOpponent(whitePlayer);
-
-//		screen.showPiecesOnBoard(board.getData());
-
-
-//		display = new GraphicalDisplay();
-//		display.showPiecesOnBoard(board.getData());
 		InitialMenu im = new InitialMenu();
-//		display = im.getGraphicalDisplay();
 
 	}
 
