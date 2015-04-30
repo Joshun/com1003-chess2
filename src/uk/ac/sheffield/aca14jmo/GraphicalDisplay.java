@@ -124,7 +124,8 @@ public class GraphicalDisplay extends JFrame implements Display {
             for (int j=0; j<data.length; j++) {
                 char buttonText;
                 if (data[j][i] != null) {
-                    buttonText = data[j][i].getChar();
+//                    buttonText = data[j][i].getChar();
+                    buttonText = PieceCode.letterToSymbol(data[j][i].getChar());
                 }
                 else {
                     buttonText = '-';

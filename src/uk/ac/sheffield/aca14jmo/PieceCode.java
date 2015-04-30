@@ -85,4 +85,36 @@ public final class PieceCode {
     return i;
   }
 
+  public static char letterToSymbol(char letter) {
+
+    char symbol;
+    switch (Character.toUpperCase(letter)) {
+      case 'K':
+        symbol = 0x2654;
+        break;
+      case 'Q':
+        symbol = 0x2655;
+        break;
+      case 'R':
+        symbol = 0x2656;
+        break;
+      case 'N':
+        symbol = 0x2658;
+        break;
+      case 'B':
+        symbol = 0x2657;
+        break;
+      case 'P':
+        symbol = 0x2659;
+        break;
+      default:
+        symbol = 'x';
+    }
+
+    if (Character.isUpperCase(letter)) {
+      symbol += 6;
+    }
+    return symbol;
+  }
+
 }
