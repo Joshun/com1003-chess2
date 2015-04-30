@@ -8,16 +8,20 @@ import java.awt.event.ActionListener;
 /**
  * Created by joshua on 29/04/15.
  */
-public class WinDialog extends JFrame {
+public class Dialog extends JFrame {
+    private boolean shouldQuit;
 
     private class ButtonHandler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            WinDialog.this.setVisible(false);
-            System.exit(0);
+            Dialog.this.setVisible(false);
+            if (Dialog.this.shouldQuit) {
+                System.exit(0);
+            }
         }
     }
 
-    public WinDialog(String message) {
+    public Dialog(String message, boolean shouldQuit) {
+        this.shouldQuit = shouldQuit;
         setSize(200, 200);
         Container contentPane = getContentPane();
         contentPane.setLayout(new GridLayout(2, 1));
@@ -26,7 +30,9 @@ public class WinDialog extends JFrame {
         button.addActionListener(new ButtonHandler());
         contentPane.add(messageLabel);
         contentPane.add(button);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        if (shouldQuit) {
+            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        }
         setVisible(true);
     }
 

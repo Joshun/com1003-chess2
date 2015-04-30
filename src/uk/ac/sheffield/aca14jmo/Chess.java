@@ -68,7 +68,7 @@ public class Chess {
 			msg = ((HumanPlayer) p).getName() + " has won the game!";
 		}
 		System.out.println(msg);
-		new WinDialog(msg);
+		new Dialog(msg, true);
 	}
 
 	public static boolean makePlayerMove(Player player, int startX, int startY, int endX, int endY) {
