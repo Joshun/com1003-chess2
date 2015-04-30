@@ -100,7 +100,6 @@ public class Pawn extends Piece {
 
     // Add move for two squares on first move
     if (y==6 && !getBoard().occupied(x, y-1) && !getBoard().occupied(x, y-2)) {
-			System.out.println("Can move");
         v.add(new Move(this, x, y, x, y-2, false));
     }
 
