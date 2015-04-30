@@ -22,6 +22,7 @@ public class GraphicalDisplay extends JFrame implements Display {
     private int startX, startY;
     private int endX, endY;
     private JLabel statusBar;
+    private TextDisplay textDisplay = new TextDisplay();
 
     private class ButtonHandler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
@@ -134,8 +135,7 @@ public class GraphicalDisplay extends JFrame implements Display {
                 buttons[i][j].setOpaque(false);
             }
         }
-        TextDisplay tx = new TextDisplay();
-        tx.showPiecesOnBoard(data);
+        textDisplay.showPiecesOnBoard(data);
     }
 
 }
