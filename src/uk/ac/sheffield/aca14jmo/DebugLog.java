@@ -17,6 +17,10 @@ public class DebugLog {
 		enabled = false;
 	}
 
+	public static boolean isEnabled() {
+		return enabled;
+	}
+
 	public static void println(Object o) {
 		if (enabled) {
 			System.out.println("DEBUG: " + o);

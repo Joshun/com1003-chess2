@@ -23,12 +23,12 @@ public class Chess {
 	private static void processArgs(String[] args) {
 		for(int i=0; i<args.length; i++) {
 			if (args[i].equals("--debug")) {
-				System.out.println("Debug mode enabled.");
+				DebugLog.println("Debug mode enabled.");
 				DebugLog.enable();
 			}
 			else {
-				System.out.println("Invalid parameter " + args[i]);
-				System.out.println("Supported flags: --debug");
+				DebugLog.println("Invalid parameter " + args[i]);
+				DebugLog.println("Supported flags: --debug");
 				System.exit(1);
 			}
 		}
@@ -52,11 +52,11 @@ public class Chess {
 		whitePlayer.setOpponent(blackPlayer);
 		blackPlayer.setOpponent(whitePlayer);
 
-		System.out.println(whitePieces);
+		DebugLog.println(whitePieces);
 
 		display = new GraphicalDisplay();
 		display.showPiecesOnBoard(board.getData());
-		System.out.println(display);
+		DebugLog.println(display);
 	}
 
 	public static void gameEnded(Player p) {
@@ -67,7 +67,7 @@ public class Chess {
 		else {
 			msg = ((HumanPlayer) p).getName() + " has won the game!";
 		}
-		System.out.println(msg);
+		DebugLog.println(msg);
 		new Dialog(msg, true);
 	}
 
@@ -86,7 +86,7 @@ public class Chess {
 	public static boolean makePlayerMove(Player player, int startX, int startY, int endX, int endY) {
 		Player opp = player.getOpponent();
 		if (player instanceof HumanPlayer) {
-			System.out.println("x: " + startX + " y: " + startY + " x: " + endX + " y: " + endY);
+			DebugLog.println("x: " + startX + " y: " + startY + " x: " + endX + " y: " + endY);
 			HumanPlayer humanPlayer = (HumanPlayer)player;
 			if (humanPlayer.makeMove(startX, startY, endX, endY)) {
 				gameEnded(humanPlayer);
@@ -113,7 +113,7 @@ public class Chess {
 	public static void makeMove(int startX, int startY, int endX, int endY) {
 		if (whiteTurn) {
 			if (makePlayerMove(whitePlayer, startX, startY, endX, endY)) {
-				System.out.println("White\'s move success!");
+				DebugLog.println("White\'s move success!");
 				if (! (blackPlayer instanceof HumanPlayer)) {
 					makePlayerMove(blackPlayer, 0, 0, 0, 0);
 				}
@@ -125,7 +125,7 @@ public class Chess {
 		}
 		else {
 			if (makePlayerMove(blackPlayer, startX, startY, endX, endY)) {
-				System.out.println("Black\'s move success!");
+				DebugLog.println("Black\'s move success!");
 				if (! (whitePlayer instanceof HumanPlayer)) {
 					makePlayerMove(whitePlayer, 0, 0, 0, 0);
 				}

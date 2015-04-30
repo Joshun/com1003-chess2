@@ -26,7 +26,7 @@ public class GraphicalDisplay extends JFrame implements Display {
 
     private class ButtonHandler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            System.out.println("ButtonHandler event: " + e);
+            DebugLog.println("ButtonHandler event: " + e);
             ChessButton source = (ChessButton)e.getSource();
             int x = source.getXValue();
             int y = source.getYValue();
@@ -35,10 +35,10 @@ public class GraphicalDisplay extends JFrame implements Display {
             source.setBorderPainted(false);
             source.setOpaque(true);
 
-            System.out.println("Button clicked: " + x + "," + y);
+            DebugLog.println("Button clicked: " + x + "," + y);
             toggleState(x, y);
             if (currentState == ClickState.CLICK_END) {
-                System.out.println("Click sequence.");
+                DebugLog.println("Click sequence.");
                 Chess.makeMove(startX, startY, endX, endY);
                 resetState();
             }
@@ -78,7 +78,7 @@ public class GraphicalDisplay extends JFrame implements Display {
             currentState = ClickState.CLICK_END;
             endX = x;
             endY = y;
-            System.out.println("State: [" + startX + "," + startY + "] -> [" + endX + "," + endY + "]");
+            DebugLog.println("State: [" + startX + "," + startY + "] -> [" + endX + "," + endY + "]");
         }
     }
 
@@ -135,7 +135,9 @@ public class GraphicalDisplay extends JFrame implements Display {
                 buttons[i][j].setOpaque(false);
             }
         }
-        textDisplay.showPiecesOnBoard(data);
+        if (DebugLog.isEnabled()) {
+            textDisplay.showPiecesOnBoard(data);
+        }
     }
 
 }

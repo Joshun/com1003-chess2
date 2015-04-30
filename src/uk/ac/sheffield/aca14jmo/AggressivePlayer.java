@@ -55,9 +55,9 @@ public class AggressivePlayer extends ComputerPlayer {
         boolean win = hasWon(moveToMake);
         moveToMake.execute(getOpponent());
 
-        System.out.println(moveToMake);
-        System.out.println(getBoard().getPiece(moveToMake.getEndX(), moveToMake.getEndY()));
-        System.out.println("win?: " + win);
+        DebugLog.println(moveToMake);
+        DebugLog.println(getBoard().getPiece(moveToMake.getEndX(), moveToMake.getEndY()));
+        DebugLog.println("win?: " + win);
         return win;
     }
 }
