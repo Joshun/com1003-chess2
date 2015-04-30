@@ -91,13 +91,10 @@ public class GraphicalDisplay extends JFrame implements Display {
         setTitle("Chess Game");
         setSize(WIDTH, HEIGHT);
         JPanel grid = new JPanel(new GridLayout(BOARD_WIDTH, BOARD_HEIGHT));
-        JPanel statusBarPanel = new JPanel();
         statusBar = new JLabel("White\'s move.");
-        statusBarPanel.add(statusBar);
 
         Container contentPane = getContentPane();
         //contentPane.setLayout(new GridLayout(BOARD_WIDTH, BOARD_HEIGHT));
-        contentPane.setLayout(new GridLayout(2, 1));
         ButtonHandler buttonListener = new ButtonHandler();
 
         for (int i=BOARD_HEIGHT-1; i>=0; i--) {
@@ -108,9 +105,9 @@ public class GraphicalDisplay extends JFrame implements Display {
                 buttons[i][j] = button;
             }
         }
-
+        contentPane.setLayout(new BoxLayout(getContentPane(), BoxLayout.PAGE_AXIS));
         contentPane.add(grid);
-        contentPane.add(statusBarPanel);
+        contentPane.add(statusBar);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }
@@ -130,7 +127,6 @@ public class GraphicalDisplay extends JFrame implements Display {
             for (int j=0; j<data.length; j++) {
                 char buttonText;
                 if (data[j][i] != null) {
-//                    buttonText = data[j][i].getChar();
                     buttonText = PieceCode.letterToSymbol(data[j][i].getChar());
                 }
                 else {
