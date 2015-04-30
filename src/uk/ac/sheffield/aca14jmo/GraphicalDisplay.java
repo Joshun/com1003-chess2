@@ -98,10 +98,6 @@ public class GraphicalDisplay extends JFrame implements Display {
         Container contentPane = getContentPane();
         //contentPane.setLayout(new GridLayout(BOARD_WIDTH, BOARD_HEIGHT));
         contentPane.setLayout(new GridLayout(2, 1));
-
-
-
-
         ButtonHandler buttonListener = new ButtonHandler();
 
         for (int i=BOARD_HEIGHT-1; i>=0; i--) {
@@ -117,6 +113,16 @@ public class GraphicalDisplay extends JFrame implements Display {
         contentPane.add(statusBarPanel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
+    }
+
+    public void resetMarkings() {
+       for (ChessButton[] row: buttons) {
+           for (ChessButton cell: row) {
+               cell.setBackground(Color.WHITE);
+               cell.setBorderPainted(true);
+               cell.setOpaque(false);
+           }
+       }
     }
 
     public void showPiecesOnBoard(Piece[][] data) {

@@ -98,6 +98,7 @@ public class Chess {
 			}
 			else {
 				display.setStatusText("Invalid move." + ((HumanPlayer) player).getName() + "\'s move.");
+				display.resetMarkings();
 				return false;
 			}
 		}
