@@ -22,13 +22,13 @@ public class Chess {
 
 	private static void processArgs(String[] args) {
 		for(int i=0; i<args.length; i++) {
-			if (args[i].equals("--debug")) {
-				DebugLog.println("Debug mode enabled.");
+			if (args[i].equals("--debug") || args[i].equals("-d")) {
+				System.out.println("Debug mode enabled.");
 				DebugLog.enable();
 			}
 			else {
-				DebugLog.println("Invalid parameter " + args[i]);
-				DebugLog.println("Supported flags: --debug");
+				System.out.println("Invalid parameter " + args[i]);
+				System.out.println("Supported flags: --debug -d");
 				System.exit(1);
 			}
 		}
