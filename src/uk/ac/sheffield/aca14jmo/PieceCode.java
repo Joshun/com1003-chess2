@@ -86,6 +86,8 @@ public final class PieceCode {
   }
 
   public static char letterToSymbol(char letter) {
+    // Black chess pieces have the same value as the white pieces with 6 added in unicode
+    final int BLACK_OFFSET = 6;
 
     char symbol;
     switch (Character.toUpperCase(letter)) {
@@ -112,7 +114,7 @@ public final class PieceCode {
     }
 
     if (Character.isUpperCase(letter)) {
-      symbol += 6;
+      symbol += BLACK_OFFSET;
     }
     return symbol;
   }
