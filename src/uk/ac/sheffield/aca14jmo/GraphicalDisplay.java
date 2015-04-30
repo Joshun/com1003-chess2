@@ -21,6 +21,7 @@ public class GraphicalDisplay extends JFrame implements Display {
     private ClickState currentState;
     private int startX, startY;
     private int endX, endY;
+    private JLabel statusBar;
 
     private class ButtonHandler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
@@ -41,6 +42,10 @@ public class GraphicalDisplay extends JFrame implements Display {
                 resetState();
             }
         }
+    }
+
+    public void setStatusText(String text) {
+        statusBar.setText(text);
     }
 
     private class ChessButton extends JButton {
@@ -84,8 +89,17 @@ public class GraphicalDisplay extends JFrame implements Display {
         currentState = ClickState.INITIAL;
         setTitle("Chess Game");
         setSize(WIDTH, HEIGHT);
+        JPanel grid = new JPanel(new GridLayout(BOARD_WIDTH, BOARD_HEIGHT));
+        JPanel statusBarPanel = new JPanel();
+        statusBar = new JLabel("White\'s move.");
+        statusBarPanel.add(statusBar);
+
         Container contentPane = getContentPane();
-        contentPane.setLayout(new GridLayout(BOARD_WIDTH, BOARD_HEIGHT));
+        //contentPane.setLayout(new GridLayout(BOARD_WIDTH, BOARD_HEIGHT));
+        contentPane.setLayout(new GridLayout(2, 1));
+
+
+
 
         ButtonHandler buttonListener = new ButtonHandler();
 
@@ -93,10 +107,13 @@ public class GraphicalDisplay extends JFrame implements Display {
             for (int j=0; j<BOARD_WIDTH; j++) {
                 ChessButton button = new ChessButton("x", j, i);
                 button.addActionListener(buttonListener);
-                contentPane.add(button);
+                grid.add(button);
                 buttons[i][j] = button;
             }
         }
+
+        contentPane.add(grid);
+        contentPane.add(statusBarPanel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }

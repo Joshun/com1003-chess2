@@ -71,7 +71,20 @@ public class Chess {
 		new Dialog(msg, true);
 	}
 
+	private static void togglePlayerText(Player player) {
+		Player opp = player.getOpponent();
+		String playerName;
+		if (opp instanceof HumanPlayer) {
+			playerName = ((HumanPlayer) opp).getName();
+		}
+		else {
+			playerName = ((ComputerPlayer) opp).getName();
+		}
+		display.setStatusText(playerName + "\'s move.");
+	}
+
 	public static boolean makePlayerMove(Player player, int startX, int startY, int endX, int endY) {
+		Player opp = player.getOpponent();
 		if (player instanceof HumanPlayer) {
 			System.out.println("x: " + startX + " y: " + startY + " x: " + endX + " y: " + endY);
 			HumanPlayer humanPlayer = (HumanPlayer)player;
@@ -79,9 +92,12 @@ public class Chess {
 				gameEnded(humanPlayer);
 			}
 			if (humanPlayer.getMoveSuccessful()) {
+				togglePlayerText(player);
+
 				return true;
 			}
 			else {
+				display.setStatusText("Invalid move." + ((HumanPlayer) player).getName() + "\'s move.");
 				return false;
 			}
 		}
@@ -89,6 +105,7 @@ public class Chess {
 			if (player.makeMove()) {
 				gameEnded(player);
 			}
+			togglePlayerText(player);
 			return true;
 		}
 	}
