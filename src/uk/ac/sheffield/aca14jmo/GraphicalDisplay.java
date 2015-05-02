@@ -13,8 +13,8 @@ public class GraphicalDisplay extends JFrame implements Display {
         INITIAL, CLICK_START, CLICK_END;
     }
 
-    public final static int WIDTH = 800;
-    public final static int HEIGHT = 600;
+    public final static int WIDTH = 1024;
+    public final static int HEIGHT = 768;
     public static final int BOARD_WIDTH = 8;
     public static final int BOARD_HEIGHT = 8;
     private ChessButton[][] buttons = new ChessButton[BOARD_WIDTH][BOARD_HEIGHT];
@@ -101,7 +101,7 @@ public class GraphicalDisplay extends JFrame implements Display {
 
         for (int i=BOARD_HEIGHT-1; i>=0; i--) {
             for (int j=0; j<BOARD_WIDTH; j++) {
-                ChessButton button = new ChessButton("x", j, i);
+                ChessButton button = new ChessButton(" ", j, i);
                 button.addActionListener(buttonListener);
                 grid.add(button);
                 buttons[i][j] = button;
@@ -135,8 +135,9 @@ public class GraphicalDisplay extends JFrame implements Display {
                 }
                 else {
                     buttonText = '-';
+                    buttons[i][j].setIcon(null);
                 }
-                buttons[i][j].setText(String.valueOf(buttonText));
+//                buttons[i][j].setText(String.valueOf(buttonText));
                 buttons[i][j].setBackground(Color.WHITE);
                 buttons[i][j].setBorderPainted(true);
                 buttons[i][j].setOpaque(false);

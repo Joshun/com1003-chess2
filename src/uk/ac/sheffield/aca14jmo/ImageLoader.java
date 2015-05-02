@@ -25,10 +25,10 @@ public class ImageLoader {
             DebugLog.println("Loading " + id + " from file.");
             String path = pathPrefix + id + pathSuffix;
             ImageIcon image = new ImageIcon(path);
-//            URL imgURL = image.getClass().getResource(path);
-//            if (imgURL == null) {
-//                System.out.println("Couldn't find image " + id + " (" + path + ")");
-//            }
+            URL imgURL = image.getClass().getResource(path);
+            if (imgURL == null) {
+                System.out.println("Couldn't find image " + id + " (" + path + ")");
+            }
             imageStore.put(id, image);
             return image;
         }
