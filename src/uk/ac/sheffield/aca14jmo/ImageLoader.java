@@ -3,7 +3,7 @@ package uk.ac.sheffield.aca14jmo; /**
  */
 
 import javax.swing.*;
-import java.net.URL;
+import java.io.File;
 import java.util.*;
 
 public class ImageLoader {
@@ -24,11 +24,11 @@ public class ImageLoader {
         else {
             DebugLog.println("Loading " + id + " from file.");
             String path = pathPrefix + id + pathSuffix;
-            ImageIcon image = new ImageIcon(path);
-            URL imgURL = image.getClass().getResource(path);
-            if (imgURL == null) {
-                System.out.println("Couldn't find image " + id + " (" + path + ")");
+            if (! new File(path).exists()) {
+                System.out.println("Error: could not load image " + id + " (" + path + ")");
+                System.exit(1);
             }
+            ImageIcon image = new ImageIcon(path);
             imageStore.put(id, image);
             return image;
         }
