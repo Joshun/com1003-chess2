@@ -65,7 +65,7 @@ public class Chess {
 			msg = ((HumanPlayer) p).getName() + " has won the game!";
 		}
 		else {
-			msg = ((HumanPlayer) p).getName() + " has won the game!";
+			msg = ((ComputerPlayer) p).getName() + " has won the game!";
 		}
 		DebugLog.println(msg);
 		new Dialog(msg, true);
