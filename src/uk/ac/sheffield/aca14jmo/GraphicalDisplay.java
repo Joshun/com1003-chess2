@@ -23,6 +23,7 @@ public class GraphicalDisplay extends JFrame implements Display {
     private int endX, endY;
     private JLabel statusBar;
     private TextDisplay textDisplay = new TextDisplay();
+    private ImageLoader imageLoader;
 
     private class ButtonHandler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
@@ -87,6 +88,7 @@ public class GraphicalDisplay extends JFrame implements Display {
     }
 
     public GraphicalDisplay() {
+        imageLoader = new ImageLoader("images/", ".png");
         currentState = ClickState.INITIAL;
         setTitle("Chess Game");
         setSize(WIDTH, HEIGHT);
@@ -128,6 +130,8 @@ public class GraphicalDisplay extends JFrame implements Display {
                 char buttonText;
                 if (data[j][i] != null) {
                     buttonText = PieceCode.letterToSymbol(data[j][i].getChar());
+                    buttons[i][j].setIcon(imageLoader.getImageForPiece(data[j][i]));
+//                    System.out.println(imageLoader.getImageForPiece(data[j][i]));
                 }
                 else {
                     buttonText = '-';
@@ -136,6 +140,8 @@ public class GraphicalDisplay extends JFrame implements Display {
                 buttons[i][j].setBackground(Color.WHITE);
                 buttons[i][j].setBorderPainted(true);
                 buttons[i][j].setOpaque(false);
+//                ImageLoader img = new ImageLoader("images/", ".png");
+
             }
         }
         if (DebugLog.isEnabled()) {
