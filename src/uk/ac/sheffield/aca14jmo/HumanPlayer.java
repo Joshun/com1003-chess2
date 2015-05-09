@@ -145,10 +145,6 @@ public class HumanPlayer extends Player {
 		return false;
 	}
 
-	public String getName() {
-		return name;
-	}
-
 	public boolean getMoveSuccessful() {
 		return moveSuccessful;
 	}

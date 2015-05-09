@@ -17,10 +17,6 @@ public abstract class ComputerPlayer extends Player {
 
     public abstract boolean makeMove();
 
-    public String getName() {
-        return name;
-    }
-
     protected static int getRandom(int max) {
         return (int)(Math.random() * max);
     }

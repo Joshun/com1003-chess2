@@ -48,6 +48,11 @@ public abstract class Player {
     return pieces;
   }
 
+  // I added this because player name should be independent of whatever subclass is instantiated
+  public String getName() {
+    return name;
+  }
+
   public abstract boolean makeMove();
  
   public void deletePiece(Piece p) {

@@ -61,26 +61,14 @@ public class Chess {
 
 	public static void gameEnded(Player p) {
 		String msg;
-		if (p instanceof HumanPlayer) {
-			msg = ((HumanPlayer) p).getName() + " has won the game!";
-		}
-		else {
-			msg = ((ComputerPlayer) p).getName() + " has won the game!";
-		}
+		msg = p.getName() + " has won the game!";
 		DebugLog.println(msg);
 		new Dialog(msg, true);
 	}
 
 	private static void togglePlayerText(Player player) {
 		Player opp = player.getOpponent();
-		String playerName;
-		if (opp instanceof HumanPlayer) {
-			playerName = ((HumanPlayer) opp).getName();
-		}
-		else {
-			playerName = ((ComputerPlayer) opp).getName();
-		}
-		display.setStatusText(playerName + "\'s move.");
+		display.setStatusText(player.getName() + "\'s move.");
 	}
 
 	public static boolean makePlayerMove(Player player, int startX, int startY, int endX, int endY) {
@@ -97,7 +85,7 @@ public class Chess {
 				return true;
 			}
 			else {
-				display.setStatusText("Invalid move." + ((HumanPlayer) player).getName() + "\'s move.");
+				display.setStatusText("Invalid move." + player.getName() + "\'s move.");
 				display.resetMarkings();
 				return false;
 			}
