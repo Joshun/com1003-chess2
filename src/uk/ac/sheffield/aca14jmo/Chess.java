@@ -68,7 +68,7 @@ public class Chess {
 
 	private static void togglePlayerText(Player player) {
 		Player opp = player.getOpponent();
-		display.setStatusText(player.getName() + "\'s move.");
+		display.setStatusText(opp.getName() + "\'s move.");
 	}
 
 	public static boolean makePlayerMove(Player player, int startX, int startY, int endX, int endY) {
