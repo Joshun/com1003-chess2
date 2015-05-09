@@ -18,7 +18,6 @@ public class Chess {
 	private static Pieces blackPieces;
 	private static GraphicalDisplay display;
 	private static boolean whiteTurn = true;
-	private static boolean endGame = false;
 
 	private static void processArgs(String[] args) {
 		for(int i=0; i<args.length; i++) {
