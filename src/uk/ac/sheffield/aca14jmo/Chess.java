@@ -18,6 +18,7 @@ public class Chess {
 	private static Pieces blackPieces;
 	private static GraphicalDisplay display;
 	private static boolean whiteTurn = true;
+	private static boolean computerVComputer = false;
 
 	private static void processArgs(String[] args) {
 		for(int i=0; i<args.length; i++) {
@@ -33,29 +34,64 @@ public class Chess {
 		}
 	}
 
-	public static void startGame(GameMode gm) {
-		switch (gm) {
-			case HUMAN_V_AGGRESSIVE:
-				whitePlayer = new HumanPlayer("White", whitePieces, board, null, input);
-				blackPlayer = new AggressivePlayer("Black", blackPieces, board, null);
+	public static Player createPlayer(GameChoice playerChoice, int colour, String name) {
+		Player player;
+		Pieces playerPieces = new Pieces(board, colour);
+		switch (playerChoice) {
+			case HUMAN:
+				player = new HumanPlayer(name, playerPieces, board, null, input);
 				break;
-			case HUMAN_V_RANDOM:
-				whitePlayer = new HumanPlayer("White", whitePieces, board, null, input);
-				blackPlayer = new AggressivePlayer("Black", blackPieces, board, null);
+			case AGGRESSIVE_COMPUTER:
+				player = new AggressivePlayer(name, playerPieces, board, null);
 				break;
-			case HUMAN_V_HUMAN:
-				whitePlayer = new HumanPlayer("White", whitePieces, board, null, input);
-				blackPlayer = new HumanPlayer("Black", blackPieces, board, null, input);
+			case RANDOM_COMPUTER:
+				player = new RandomPlayer(name, playerPieces, board, null);
 				break;
+			default:
+				player = null;
 		}
+		return player;
+	}
+
+	public static void startGame(GameChoice player1Choice, GameChoice player2Choice) {
+//		switch (gm) {
+//			case HUMAN_V_AGGRESSIVE:
+//				whitePlayer = new HumanPlayer("White", whitePieces, board, null, input);
+//				blackPlayer = new AggressivePlayer("Black", blackPieces, board, null);
+//				break;
+//			case HUMAN_V_RANDOM:
+//				whitePlayer = new HumanPlayer("White", whitePieces, board, null, input);
+//				blackPlayer = new AggressivePlayer("Black", blackPieces, board, null);
+//				break;
+//			case HUMAN_V_HUMAN:
+//				whitePlayer = new HumanPlayer("White", whitePieces, board, null, input);
+//				blackPlayer = new HumanPlayer("Black", blackPieces, board, null, input);
+//				break;
+//		}
+
+		whitePlayer = createPlayer(player1Choice, PieceCode.WHITE, "Player 1");
+		blackPlayer = createPlayer(player2Choice, PieceCode.BLACK, "Player 2");
 		whitePlayer.setOpponent(blackPlayer);
 		blackPlayer.setOpponent(whitePlayer);
+		System.out.println(whitePlayer);
+		System.out.println(blackPlayer);
+//		System.exit(0);
 
 		DebugLog.println(whitePieces);
+		if (whitePlayer instanceof ComputerPlayer) {
+			whitePlayer.makeMove();
+		}
+		if (whitePlayer instanceof ComputerPlayer && blackPlayer instanceof ComputerPlayer) {
+			computerVComputer = true;
+		}
 
 		display = new GraphicalDisplay();
 		display.showPiecesOnBoard(board.getData());
-		DebugLog.println(display);
+		if (computerVComputer) {
+			playComputerVComputer();
+		}
+//		DebugLog.println(display);
+
 	}
 
 	public static void gameEnded(Player p) {
@@ -98,6 +134,19 @@ public class Chess {
 		}
 	}
 
+	public static void playComputerVComputer() {
+		while (true) {
+			makeMove(0, 0, 0, 0);
+			display.showPiecesOnBoard(board.getData());
+			try {
+				Thread.sleep(1000);
+			}
+			catch (java.lang.InterruptedException e) {
+				System.out.println("Error: delay interrupted");
+			}
+		}
+	}
+
 	public static void makeMove(int startX, int startY, int endX, int endY) {
 		if (whiteTurn) {
 			if (makePlayerMove(whitePlayer, startX, startY, endX, endY)) {
@@ -123,6 +172,10 @@ public class Chess {
 				display.showPiecesOnBoard(board.getData());
 			}
 		}
+	}
+
+	public static boolean getComputerVComputer() {
+		return computerVComputer;
 	}
 
 
