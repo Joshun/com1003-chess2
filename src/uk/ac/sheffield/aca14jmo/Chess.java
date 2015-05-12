@@ -53,7 +53,7 @@ public class Chess {
 		return player;
 	}
 
-	public static void startGame(GameChoice player1Choice, GameChoice player2Choice) {
+	public static void startGame(GameChoice player1Choice, GameChoice player2Choice, int computerDelay) {
 //		switch (gm) {
 //			case HUMAN_V_AGGRESSIVE:
 //				whitePlayer = new HumanPlayer("White", whitePieces, board, null, input);
@@ -85,7 +85,7 @@ public class Chess {
 			computerVComputer = true;
 		}
 
-		display = new GraphicalDisplay();
+		display = new GraphicalDisplay(computerDelay);
 		display.showPiecesOnBoard(board.getData());
 //		if (computerVComputer) {
 //			makeMove(0, 0, 0, 0);

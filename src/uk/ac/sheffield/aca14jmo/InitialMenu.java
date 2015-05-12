@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 public class InitialMenu extends JFrame {
     private JComboBox player1Combo;
     private JComboBox player2Combo;
+    private JSpinner computerDelaySpinner;
 
 //    private class MenuButton extends JButton {
 //        private GameMode gameMode;
@@ -35,7 +36,7 @@ public class InitialMenu extends JFrame {
 //                Chess.playComputerVComputer();
 //            }
 //            else {
-                Chess.startGame(player1Choice, player2Choice);
+                Chess.startGame(player1Choice, player2Choice, (int)computerDelaySpinner.getValue());
 //            }
             InitialMenu.this.setVisible(false);
         }
@@ -58,11 +59,15 @@ public class InitialMenu extends JFrame {
     public InitialMenu() {
         setTitle("Select a game mode");
         Container contentPane = getContentPane();
-        contentPane.setLayout(new GridLayout(3, 2));
+        contentPane.setLayout(new GridLayout(4, 2));
         JButton playButton = new JButton("Play!");
         playButton.addActionListener(new ButtonHandler());
         JLabel player1Text = new JLabel("Player 1");
         JLabel player2Text = new JLabel("Player 2");
+        JLabel delayText = new JLabel("Computer versus delay");
+        SpinnerNumberModel delaySpinnerModel = new SpinnerNumberModel(1, 1, 10, 1);
+        JSpinner delaySpinner = new JSpinner(delaySpinnerModel);
+        computerDelaySpinner = delaySpinner;
         player1Combo = new JComboBox();
         player2Combo = new JComboBox();
         setupComboBox(player1Combo);
@@ -71,6 +76,10 @@ public class InitialMenu extends JFrame {
         contentPane.add(player1Combo);
         contentPane.add(player2Text);
         contentPane.add(player2Combo);
+        contentPane.add(delayText);
+        contentPane.add(delaySpinner);
+        // Empty container to push button to rightmost cell
+        contentPane.add(new Container());
         contentPane.add(playButton);
 
 //        MenuButton[] buttons = {
