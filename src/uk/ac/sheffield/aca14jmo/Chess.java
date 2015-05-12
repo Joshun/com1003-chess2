@@ -54,20 +54,6 @@ public class Chess {
 	}
 
 	public static void startGame(GameChoice player1Choice, GameChoice player2Choice, int computerDelay) {
-//		switch (gm) {
-//			case HUMAN_V_AGGRESSIVE:
-//				whitePlayer = new HumanPlayer("White", whitePieces, board, null, input);
-//				blackPlayer = new AggressivePlayer("Black", blackPieces, board, null);
-//				break;
-//			case HUMAN_V_RANDOM:
-//				whitePlayer = new HumanPlayer("White", whitePieces, board, null, input);
-//				blackPlayer = new AggressivePlayer("Black", blackPieces, board, null);
-//				break;
-//			case HUMAN_V_HUMAN:
-//				whitePlayer = new HumanPlayer("White", whitePieces, board, null, input);
-//				blackPlayer = new HumanPlayer("Black", blackPieces, board, null, input);
-//				break;
-//		}
 
 		whitePlayer = createPlayer(player1Choice, PieceCode.WHITE, "Player 1");
 		blackPlayer = createPlayer(player2Choice, PieceCode.BLACK, "Player 2");
@@ -75,9 +61,7 @@ public class Chess {
 		blackPlayer.setOpponent(whitePlayer);
 		System.out.println(whitePlayer);
 		System.out.println(blackPlayer);
-//		System.exit(0);
 
-		DebugLog.println(whitePieces);
 		if (whitePlayer instanceof ComputerPlayer) {
 			whitePlayer.makeMove();
 		}
@@ -87,11 +71,6 @@ public class Chess {
 
 		display = new GraphicalDisplay(computerDelay);
 		display.showPiecesOnBoard(board.getData());
-//		if (computerVComputer) {
-//			makeMove(0, 0, 0, 0);
-//		}
-//		DebugLog.println(display);
-
 	}
 
 	public static void gameEnded(Player p) {
@@ -134,19 +113,6 @@ public class Chess {
 			return true;
 		}
 	}
-
-//	public static void playComputerVComputer() {
-//		while (true) {
-//			makeMove(0, 0, 0, 0);
-//			display.showPiecesOnBoard(board.getData());
-////			try {
-////				Thread.sleep(1000);
-////			}
-////			catch (java.lang.InterruptedException e) {
-////				System.out.println("Error: delay interrupted");
-////			}
-//		}
-//	}
 
 	public static void nextComputerMove() {
 		makeMove(0, 0, 0, 0);

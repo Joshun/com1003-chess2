@@ -24,7 +24,6 @@ public class GraphicalDisplay extends JFrame implements Display {
     private JLabel statusBar;
     private TextDisplay textDisplay = new TextDisplay();
     private ImageLoader imageLoader;
-    private int computerDelay;
     private Timer computerTimer = null;
 
     private class ComputerHandler implements ActionListener {
@@ -96,7 +95,6 @@ public class GraphicalDisplay extends JFrame implements Display {
     }
 
     public GraphicalDisplay(int computerDelay) {
-        this.computerDelay = computerDelay;
         imageLoader = new ImageLoader("images/", ".png");
         currentState = ClickState.INITIAL;
         setTitle("Chess Game");

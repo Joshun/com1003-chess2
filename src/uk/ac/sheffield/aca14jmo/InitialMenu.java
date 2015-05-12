@@ -1,56 +1,29 @@
 package uk.ac.sheffield.aca14jmo;
 
-import uk.ac.sheffield.aca14jmo.GameMode;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * Created by joshua on 29/04/15.
+ * uk.ac.sheffield.aca14jmo.InitialMenu.java
+ * Class for the menu that is displayed on game start to choose player types
  */
 public class InitialMenu extends JFrame {
-    private JComboBox player1Combo;
-    private JComboBox player2Combo;
+    private JComboBox<GameChoice> player1Combo;
+    private JComboBox<GameChoice> player2Combo;
     private JSpinner computerDelaySpinner;
-
-//    private class MenuButton extends JButton {
-//        private GameMode gameMode;
-//        public MenuButton(String text, GameMode gm) {
-//            super(text);
-//            this.gameMode = gm;
-//        }
-//        public GameMode getGameMode() {
-//            return gameMode;
-//        }
-//    }
 
     private class ButtonHandler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-//            MenuButton source = (MenuButton)e.getSource();
-//            Chess.startGame(source.getGameMode());
             GameChoice player1Choice = (GameChoice)player1Combo.getSelectedItem();
             GameChoice player2Choice = (GameChoice)player2Combo.getSelectedItem();
-//            if (player1Choice != GameChoice.HUMAN && player2Choice != GameChoice.HUMAN) {
-//                Chess.playComputerVComputer();
-//            }
-//            else {
-                Chess.startGame(player1Choice, player2Choice, (int)computerDelaySpinner.getValue());
-//            }
+            Chess.startGame(player1Choice, player2Choice, (int)computerDelaySpinner.getValue());
             InitialMenu.this.setVisible(false);
         }
     }
 
-//    private void setupButtons(MenuButton[] buttons, Container contentPane) {
-//        ButtonHandler buttonListener = new ButtonHandler();
-//        for (MenuButton button: buttons) {
-//            button.addActionListener(buttonListener);
-//            contentPane.add(button);
-//        }
-//    }
-
-    private void setupComboBox(JComboBox comboBox) {
+    private void setupComboBox(JComboBox<GameChoice> comboBox) {
         comboBox.addItem(GameChoice.HUMAN);
         comboBox.addItem(GameChoice.AGGRESSIVE_COMPUTER);
         comboBox.addItem(GameChoice.RANDOM_COMPUTER);
@@ -68,8 +41,8 @@ public class InitialMenu extends JFrame {
         SpinnerNumberModel delaySpinnerModel = new SpinnerNumberModel(1, 1, 10, 1);
         JSpinner delaySpinner = new JSpinner(delaySpinnerModel);
         computerDelaySpinner = delaySpinner;
-        player1Combo = new JComboBox();
-        player2Combo = new JComboBox();
+        player1Combo = new JComboBox<GameChoice>();
+        player2Combo = new JComboBox<GameChoice>();
         setupComboBox(player1Combo);
         setupComboBox(player2Combo);
         contentPane.add(player1Text);
@@ -82,14 +55,6 @@ public class InitialMenu extends JFrame {
         contentPane.add(new Container());
         contentPane.add(playButton);
 
-//        MenuButton[] buttons = {
-//                new MenuButton("Human vs Aggressive CPU", GameMode.HUMAN_V_AGGRESSIVE),
-//                new MenuButton("Human vs Random CPU", GameMode.HUMAN_V_RANDOM),
-//                new MenuButton("Human vs Human", GameMode.HUMAN_V_HUMAN)
-//        };
-//        // Connect event handler to buttons and add them to the contentPane
-//        setupButtons(buttons, contentPane);
-        // Automatically set size
         pack();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
