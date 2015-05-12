@@ -24,6 +24,13 @@ public class GraphicalDisplay extends JFrame implements Display {
     private JLabel statusBar;
     private TextDisplay textDisplay = new TextDisplay();
     private ImageLoader imageLoader;
+    private Timer computerTimer = null;
+
+    private class ComputerHandler implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            Chess.nextComputerMove();
+        }
+    }
 
     private class ButtonHandler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
@@ -112,6 +119,11 @@ public class GraphicalDisplay extends JFrame implements Display {
         contentPane.add(statusBar);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
+        if (Chess.getComputerVComputer()) {
+            computerTimer = new Timer(1000, new ComputerHandler());
+            computerTimer.setRepeats(true);
+            computerTimer.start();
+        }
     }
 
     public void resetMarkings() {
@@ -169,6 +181,11 @@ public class GraphicalDisplay extends JFrame implements Display {
         if (DebugLog.isEnabled()) {
             textDisplay.showPiecesOnBoard(data);
         }
+
+    }
+
+    public void stopComputerMovement() {
+        if (computerTimer != null) computerTimer.stop();
     }
 
 }

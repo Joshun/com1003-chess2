@@ -87,9 +87,9 @@ public class Chess {
 
 		display = new GraphicalDisplay();
 		display.showPiecesOnBoard(board.getData());
-		if (computerVComputer) {
-			playComputerVComputer();
-		}
+//		if (computerVComputer) {
+//			makeMove(0, 0, 0, 0);
+//		}
 //		DebugLog.println(display);
 
 	}
@@ -98,6 +98,7 @@ public class Chess {
 		String msg;
 		msg = p.getName() + " has won the game!";
 		DebugLog.println(msg);
+		display.stopComputerMovement();
 		new Dialog(msg, true);
 	}
 
@@ -134,24 +135,28 @@ public class Chess {
 		}
 	}
 
-	public static void playComputerVComputer() {
-		while (true) {
-			makeMove(0, 0, 0, 0);
-			display.showPiecesOnBoard(board.getData());
-			try {
-				Thread.sleep(1000);
-			}
-			catch (java.lang.InterruptedException e) {
-				System.out.println("Error: delay interrupted");
-			}
-		}
+//	public static void playComputerVComputer() {
+//		while (true) {
+//			makeMove(0, 0, 0, 0);
+//			display.showPiecesOnBoard(board.getData());
+////			try {
+////				Thread.sleep(1000);
+////			}
+////			catch (java.lang.InterruptedException e) {
+////				System.out.println("Error: delay interrupted");
+////			}
+//		}
+//	}
+
+	public static void nextComputerMove() {
+		makeMove(0, 0, 0, 0);
 	}
 
 	public static void makeMove(int startX, int startY, int endX, int endY) {
 		if (whiteTurn) {
 			if (makePlayerMove(whitePlayer, startX, startY, endX, endY)) {
 				DebugLog.println("White\'s move success!");
-				if (! (blackPlayer instanceof HumanPlayer)) {
+				if (! (blackPlayer instanceof HumanPlayer) && !computerVComputer) {
 					makePlayerMove(blackPlayer, 0, 0, 0, 0);
 				}
 				else {
@@ -163,7 +168,7 @@ public class Chess {
 		else {
 			if (makePlayerMove(blackPlayer, startX, startY, endX, endY)) {
 				DebugLog.println("Black\'s move success!");
-				if (! (whitePlayer instanceof HumanPlayer)) {
+				if (! (whitePlayer instanceof HumanPlayer) && ! computerVComputer) {
 					makePlayerMove(whitePlayer, 0, 0, 0, 0);
 				}
 				else {
