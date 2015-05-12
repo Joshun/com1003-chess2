@@ -115,16 +115,37 @@ public class GraphicalDisplay extends JFrame implements Display {
     }
 
     public void resetMarkings() {
-       for (ChessButton[] row: buttons) {
-           for (ChessButton cell: row) {
-               cell.setBackground(Color.WHITE);
-               cell.setBorderPainted(true);
-               cell.setOpaque(false);
-           }
-       }
+//       for (ChessButton[] row: buttons) {
+//           for (ChessButton cell: row) {
+//               cell.setBackground(Color.WHITE);
+//               cell.setBorderPainted(true);
+//               cell.setOpaque(false);
+//           }
+//       }
+        for (int row=0; row<buttons.length; row++) {
+            for (int column=0; column<buttons[0].length; column++) {
+                if ((row % 2) != 0) {
+                    if ((column % 2) != 0) {
+                        buttons[row][column].setBackground(Color.BLACK);
+                    }
+                    else {
+                        buttons[row][column].setBackground(Color.WHITE);
+                    }
+                }
+                else {
+                    if ((column % 2) != 0) {
+                        buttons[row][column].setBackground(Color.WHITE);
+                    }
+                    else {
+                        buttons[row][column].setBackground(Color.BLACK);
+                    }
+                }
+            }
+        }
     }
 
     public void showPiecesOnBoard(Piece[][] data) {
+        resetMarkings();
         for (int i=data.length-1; i>=0; i--) {
             for (int j=0; j<data.length; j++) {
                 char buttonText;
@@ -138,9 +159,9 @@ public class GraphicalDisplay extends JFrame implements Display {
                     buttons[i][j].setIcon(null);
                 }
 //                buttons[i][j].setText(String.valueOf(buttonText));
-                buttons[i][j].setBackground(Color.WHITE);
+//                buttons[i][j].setBackground(Color.WHITE);
                 buttons[i][j].setBorderPainted(true);
-                buttons[i][j].setOpaque(false);
+                buttons[i][j].setOpaque(true);
 //                ImageLoader img = new ImageLoader("images/", ".png");
 
             }
