@@ -56,6 +56,7 @@ public class InitialMenu extends JFrame {
         contentPane.add(new Container());
         contentPane.add(playButton);
 
+        // Make the GUI an appropriate size
         pack();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);

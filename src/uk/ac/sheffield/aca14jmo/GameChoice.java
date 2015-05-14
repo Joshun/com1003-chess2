@@ -1,7 +1,9 @@
 package uk.ac.sheffield.aca14jmo;
 
 /**
- * Created by joshua on 09/05/15.
+ * uk.ac.sheffield.aca14jmo.GameChoice.java
+ *
+ * Enum used to keep track of which players have been selected
  */
 public enum GameChoice {
     HUMAN, AGGRESSIVE_COMPUTER, RANDOM_COMPUTER;

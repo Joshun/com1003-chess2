@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
  * Class for the game's main display, i.e. the chessboard interface itself
  */
 public class GraphicalDisplay extends JFrame implements Display {
+    // Used to keep track of the player clicking the start and end positions of a move
     private enum ClickState {
         INITIAL, CLICK_START, CLICK_END
     }
@@ -37,6 +38,7 @@ public class GraphicalDisplay extends JFrame implements Display {
     private class ButtonHandler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             DebugLog.println("ButtonHandler event: " + e);
+            // Get the x and y coordinates of the button clicked
             ChessButton source = (ChessButton)e.getSource();
             int x = source.getXValue();
             int y = source.getYValue();
@@ -137,6 +139,10 @@ public class GraphicalDisplay extends JFrame implements Display {
     }
 
     public void resetMarkings() {
+        /* Remove all markings (i.e. when the player has selected a piece to move) and replace them with
+           the checkered board pattern
+         */
+
         for (int row=0; row<buttons.length; row++) {
             for (int column=0; column<buttons[0].length; column++) {
                 if ((row % 2) != 0) {
@@ -163,9 +169,11 @@ public class GraphicalDisplay extends JFrame implements Display {
         resetMarkings();
         for (int i=data.length-1; i>=0; i--) {
             for (int j=0; j<data.length; j++) {
+                // Get the piece at the relevant board position and retrieve its icon
                 if (data[j][i] != null) {
                     buttons[i][j].setIcon(imageLoader.getImageForPiece(data[j][i]));
                 }
+                // Set icon to null if there is no piece at that position
                 else {
                     buttons[i][j].setIcon(null);
                 }
@@ -181,6 +189,7 @@ public class GraphicalDisplay extends JFrame implements Display {
     }
 
     public void stopComputerMovement() {
+        // Function to stop timer, used to stop computers playing when the game has finished
         if (computerTimer != null) computerTimer.stop();
     }
 

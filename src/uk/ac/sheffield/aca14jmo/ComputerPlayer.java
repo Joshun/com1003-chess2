@@ -22,12 +22,10 @@ public abstract class ComputerPlayer extends Player {
     }
 
     public ArrayList<Move> getAllPossibleMoves() {
-        Board board = getBoard();
         Pieces pieces = getPieces();
-        int colour = pieces.getPiece(0).getColour();
 
         ArrayList<Move> possibleMoves = new ArrayList<>();
-        ArrayList<Move> pieceMoves = new ArrayList<>();
+        ArrayList<Move> pieceMoves;
 
         int numPieces = pieces.getNumPieces();
         for(int i=0; i<numPieces; i++) {

@@ -149,9 +149,4 @@ public class HumanPlayer extends Player {
 		return moveSuccessful;
 	}
 
-	public static void main(String[] args) {
-		Scanner input = new Scanner(System.in);
-		Board b = new Board();
-	}
-
 }
