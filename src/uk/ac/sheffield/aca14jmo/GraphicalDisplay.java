@@ -47,7 +47,12 @@ public class GraphicalDisplay extends JFrame implements Display {
             toggleState(x, y);
             if (currentState == ClickState.CLICK_END) {
                 DebugLog.println("Click sequence.");
-                Chess.makeMove(startX, startY, endX, endY);
+                if (startX == endX && startY == endY) {
+                    resetMarkings();
+                }
+                else{
+                    Chess.makeMove(startX, startY, endX, endY);
+                }
                 resetState();
             }
         }
