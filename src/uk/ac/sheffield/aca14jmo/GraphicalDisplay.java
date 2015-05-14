@@ -9,8 +9,8 @@ import java.awt.event.ActionListener;
  * Created by joshua on 22/04/15.
  */
 public class GraphicalDisplay extends JFrame implements Display {
-    public enum ClickState {
-        INITIAL, CLICK_START, CLICK_END;
+    private enum ClickState {
+        INITIAL, CLICK_START, CLICK_END
     }
 
     public final static int WIDTH = 1024;
@@ -44,9 +44,13 @@ public class GraphicalDisplay extends JFrame implements Display {
             source.setOpaque(true);
 
             DebugLog.println("Button clicked: " + x + "," + y);
+            // Toggle users state of clicking
             toggleState(x, y);
+            // Player has clicked end position, attempt to make move
             if (currentState == ClickState.CLICK_END) {
                 DebugLog.println("Click sequence.");
+
+                // Deselect if user presses same square twice
                 if (startX == endX && startY == endY) {
                     resetMarkings();
                 }
