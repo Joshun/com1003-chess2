@@ -36,6 +36,7 @@ public class Chess {
 	}
 
 	public static Player createPlayer(GameChoice playerChoice, int colour, String name) {
+		// Create a new player given a GameChoice from the InitialMenu screen
 		Player player;
 		Pieces playerPieces = new Pieces(board, colour);
 		switch (playerChoice) {
@@ -95,7 +96,9 @@ public class Chess {
 	}
 
 	public static boolean makePlayerMove(Player player, int startX, int startY, int endX, int endY) {
-		Player opp = player.getOpponent();
+		/* This function causes the specified player to make its move and checks for move success and endgame
+		   For computer players 0's are passed as X and Y values, as the computer players are responsible for choosing these
+		 */
 		if (player instanceof HumanPlayer) {
 			DebugLog.println("x: " + startX + " y: " + startY + " x: " + endX + " y: " + endY);
 			HumanPlayer humanPlayer = (HumanPlayer)player;
@@ -130,13 +133,18 @@ public class Chess {
 		if (whiteTurn) {
 			if (makePlayerMove(whitePlayer, startX, startY, endX, endY)) {
 				DebugLog.println("White\'s move success!");
+				/* If opponent is a computer player make its move, unless it is a computer v computer match,
+				   in which case this is handled by the GUI timers
+				 */
 				if (! (blackPlayer instanceof HumanPlayer) && !computerVComputer) {
 					makePlayerMove(blackPlayer, 0, 0, 0, 0);
 				}
+				// Otherwise, set whiteTurn to false to ensure the next human player can make their move
 				else {
 					whiteTurn = false;
 				}
 			}
+			// Finally, redraw the board with the new positions
 			display.showPiecesOnBoard(board.getData());
 		}
 		else {
@@ -166,7 +174,7 @@ public class Chess {
 		whitePieces = new Pieces(board, PieceCode.WHITE);
 		blackPieces = new Pieces(board, PieceCode.BLACK);
 
-		InitialMenu im = new InitialMenu();
+		InitialMenu choiceScreen = new InitialMenu();
 
 	}
 

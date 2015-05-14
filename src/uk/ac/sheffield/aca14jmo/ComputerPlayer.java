@@ -8,13 +8,11 @@ import java.util.ArrayList;
  * Abstract class to represent a computer player providing common functionality
  */
 public abstract class ComputerPlayer extends Player {
-    private String name;
-
     public ComputerPlayer(String n, Pieces p, Board b, Player o) {
         super(n, p, b, o);
-        name = n;
     }
 
+    // This is specific depending on the type of computer player
     public abstract boolean makeMove();
 
     protected static int getRandom(int max) {
@@ -22,6 +20,7 @@ public abstract class ComputerPlayer extends Player {
     }
 
     public ArrayList<Move> getAllPossibleMoves() {
+        // Function returns all the possible moves a computer player can make
         Pieces pieces = getPieces();
 
         ArrayList<Move> possibleMoves = new ArrayList<>();
@@ -46,7 +45,7 @@ public abstract class ComputerPlayer extends Player {
             Piece takePiece = getBoard().getPiece(takePieceX, takePieceY);
 
             if (takePiece instanceof King) {
-                System.out.println(name + " has won.");
+                System.out.println(getName() + " has won.");
             }
 
             return takePiece instanceof King;
