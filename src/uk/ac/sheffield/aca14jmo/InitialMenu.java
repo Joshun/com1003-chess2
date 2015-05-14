@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 
 /**
  * uk.ac.sheffield.aca14jmo.InitialMenu.java
+ *
  * Class for the menu that is displayed on game start to choose player types
  */
 public class InitialMenu extends JFrame {
@@ -41,8 +42,8 @@ public class InitialMenu extends JFrame {
         SpinnerNumberModel delaySpinnerModel = new SpinnerNumberModel(1, 1, 10, 1);
         JSpinner delaySpinner = new JSpinner(delaySpinnerModel);
         computerDelaySpinner = delaySpinner;
-        player1Combo = new JComboBox<GameChoice>();
-        player2Combo = new JComboBox<GameChoice>();
+        player1Combo = new JComboBox<>();
+        player2Combo = new JComboBox<>();
         setupComboBox(player1Combo);
         setupComboBox(player2Combo);
         contentPane.add(player1Text);

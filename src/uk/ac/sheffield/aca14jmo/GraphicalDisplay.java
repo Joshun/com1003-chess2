@@ -6,7 +6,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * Created by joshua on 22/04/15.
+ * uk.ac.sheffield.aca14jmo.GraphicalDisplay.java
+ *
+ * Class for the game's main display, i.e. the chessboard interface itself
  */
 public class GraphicalDisplay extends JFrame implements Display {
     private enum ClickState {
@@ -112,7 +114,6 @@ public class GraphicalDisplay extends JFrame implements Display {
         statusBar = new JLabel(whiteName + "\'s move.");
 
         Container contentPane = getContentPane();
-        //contentPane.setLayout(new GridLayout(BOARD_WIDTH, BOARD_HEIGHT));
         ButtonHandler buttonListener = new ButtonHandler();
 
         for (int i=BOARD_HEIGHT-1; i>=0; i--) {
@@ -136,13 +137,6 @@ public class GraphicalDisplay extends JFrame implements Display {
     }
 
     public void resetMarkings() {
-//       for (ChessButton[] row: buttons) {
-//           for (ChessButton cell: row) {
-//               cell.setBackground(Color.WHITE);
-//               cell.setBorderPainted(true);
-//               cell.setOpaque(false);
-//           }
-//       }
         for (int row=0; row<buttons.length; row++) {
             for (int column=0; column<buttons[0].length; column++) {
                 if ((row % 2) != 0) {
@@ -169,21 +163,14 @@ public class GraphicalDisplay extends JFrame implements Display {
         resetMarkings();
         for (int i=data.length-1; i>=0; i--) {
             for (int j=0; j<data.length; j++) {
-                char buttonText;
                 if (data[j][i] != null) {
-                    buttonText = PieceCode.letterToSymbol(data[j][i].getChar());
                     buttons[i][j].setIcon(imageLoader.getImageForPiece(data[j][i]));
-//                    System.out.println(imageLoader.getImageForPiece(data[j][i]));
                 }
                 else {
-                    buttonText = '-';
                     buttons[i][j].setIcon(null);
                 }
-//                buttons[i][j].setText(String.valueOf(buttonText));
-//                buttons[i][j].setBackground(Color.WHITE);
                 buttons[i][j].setBorderPainted(true);
                 buttons[i][j].setOpaque(true);
-//                ImageLoader img = new ImageLoader("images/", ".png");
 
             }
         }

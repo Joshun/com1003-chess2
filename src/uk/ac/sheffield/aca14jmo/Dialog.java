@@ -6,7 +6,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * Created by joshua on 29/04/15.
+ * uk.ac.sheffield.aca14jmo.Dialog.java
+ *
+ * Class for a simple alert dialog for a given message, with the option of exiting upon its closure
  */
 public class Dialog extends JFrame {
     private boolean shouldQuit;
