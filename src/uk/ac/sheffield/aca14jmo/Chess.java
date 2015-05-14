@@ -70,12 +70,14 @@ public class Chess {
 			}
 			else {
 				whiteIsComputer = true;
-				makePlayerMove(whitePlayer, 0, 0, 0, 0);
 			}
 		}
 
 		display = new GraphicalDisplay(whitePlayer.getName(), computerDelay);
 		display.showPiecesOnBoard(board.getData());
+		if (whiteIsComputer) {
+			makeMove(0, 0, 0, 0);
+		}
 		togglePlayerText(whitePlayer);
 	}
 
@@ -125,6 +127,7 @@ public class Chess {
 	}
 
 	public static void makeMove(int startX, int startY, int endX, int endY) {
+		System.out.println("whiteTurn: " + whiteTurn);
 		if (whiteTurn) {
 			if (makePlayerMove(whitePlayer, startX, startY, endX, endY)) {
 				DebugLog.println("White\'s move success!");
@@ -154,8 +157,6 @@ public class Chess {
 	public static boolean getComputerVComputer() {
 		return computerVComputer;
 	}
-	public static boolean getWhiteIsComputer() { return whiteIsComputer; }
-
 
 	public static void main(String[] args)  throws InterruptedException {
 		processArgs(args);
