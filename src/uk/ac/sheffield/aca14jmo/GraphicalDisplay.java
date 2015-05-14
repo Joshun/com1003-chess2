@@ -94,13 +94,13 @@ public class GraphicalDisplay extends JFrame implements Display {
         currentState = ClickState.INITIAL;
     }
 
-    public GraphicalDisplay(int computerDelay) {
+    public GraphicalDisplay(String whiteName, int computerDelay) {
         imageLoader = new ImageLoader("images/", ".png");
         currentState = ClickState.INITIAL;
         setTitle("Chess Game");
         setSize(WIDTH, HEIGHT);
         JPanel grid = new JPanel(new GridLayout(BOARD_WIDTH, BOARD_HEIGHT));
-        statusBar = new JLabel("White\'s move.");
+        statusBar = new JLabel(whiteName + "\'s move.");
 
         Container contentPane = getContentPane();
         //contentPane.setLayout(new GridLayout(BOARD_WIDTH, BOARD_HEIGHT));

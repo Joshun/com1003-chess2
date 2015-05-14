@@ -62,14 +62,17 @@ public class Chess {
 		System.out.println(whitePlayer);
 		System.out.println(blackPlayer);
 
+
 		if (whitePlayer instanceof ComputerPlayer) {
-			whitePlayer.makeMove();
-		}
-		if (whitePlayer instanceof ComputerPlayer && blackPlayer instanceof ComputerPlayer) {
-			computerVComputer = true;
+			if (blackPlayer instanceof ComputerPlayer) {
+				computerVComputer = true;
+			}
+			else {
+				whitePlayer.makeMove();
+			}
 		}
 
-		display = new GraphicalDisplay(computerDelay);
+		display = new GraphicalDisplay(whitePlayer.getName(), computerDelay);
 		display.showPiecesOnBoard(board.getData());
 	}
 
