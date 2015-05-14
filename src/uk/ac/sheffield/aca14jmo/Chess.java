@@ -19,6 +19,7 @@ public class Chess {
 	private static GraphicalDisplay display;
 	private static boolean whiteTurn = true;
 	private static boolean computerVComputer = false;
+	private static boolean whiteIsComputer = false;
 
 	private static void processArgs(String[] args) {
 		for(int i=0; i<args.length; i++) {
@@ -68,12 +69,14 @@ public class Chess {
 				computerVComputer = true;
 			}
 			else {
-				whitePlayer.makeMove();
+				whiteIsComputer = true;
+				makePlayerMove(whitePlayer, 0, 0, 0, 0);
 			}
 		}
 
 		display = new GraphicalDisplay(whitePlayer.getName(), computerDelay);
 		display.showPiecesOnBoard(board.getData());
+		togglePlayerText(whitePlayer);
 	}
 
 	public static void gameEnded(Player p) {
@@ -86,7 +89,7 @@ public class Chess {
 
 	private static void togglePlayerText(Player player) {
 		Player opp = player.getOpponent();
-		display.setStatusText(opp.getName() + "\'s move.");
+		if (display != null ) display.setStatusText(opp.getName() + "\'s move.");
 	}
 
 	public static boolean makePlayerMove(Player player, int startX, int startY, int endX, int endY) {
@@ -151,6 +154,7 @@ public class Chess {
 	public static boolean getComputerVComputer() {
 		return computerVComputer;
 	}
+	public static boolean getWhiteIsComputer() { return whiteIsComputer; }
 
 
 	public static void main(String[] args)  throws InterruptedException {
