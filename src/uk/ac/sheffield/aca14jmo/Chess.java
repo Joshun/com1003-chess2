@@ -22,13 +22,13 @@ public class Chess {
 	private static boolean whiteIsComputer = false;
 
 	private static void processArgs(String[] args) {
-		for(int i=0; i<args.length; i++) {
-			if (args[i].equals("--debug") || args[i].equals("-d")) {
+		for(String argument: args) {
+			if (argument.equals("--debug") || argument.equals("-d")) {
 				System.out.println("Debug mode enabled.");
 				DebugLog.enable();
 			}
 			else {
-				System.out.println("Invalid parameter " + args[i]);
+				System.out.println("Invalid parameter " + argument);
 				System.out.println("Supported flags: --debug -d");
 				System.exit(1);
 			}
@@ -60,8 +60,8 @@ public class Chess {
 		blackPlayer = createPlayer(player2Choice, PieceCode.BLACK, "Player 2");
 		whitePlayer.setOpponent(blackPlayer);
 		blackPlayer.setOpponent(whitePlayer);
-		System.out.println(whitePlayer);
-		System.out.println(blackPlayer);
+		DebugLog.println("created white player with name " + whitePlayer.getName());
+		DebugLog.println("created black player with name " + blackPlayer.getName());
 
 
 		if (whitePlayer instanceof ComputerPlayer) {
@@ -127,7 +127,6 @@ public class Chess {
 	}
 
 	public static void makeMove(int startX, int startY, int endX, int endY) {
-		System.out.println("whiteTurn: " + whiteTurn);
 		if (whiteTurn) {
 			if (makePlayerMove(whitePlayer, startX, startY, endX, endY)) {
 				DebugLog.println("White\'s move success!");
