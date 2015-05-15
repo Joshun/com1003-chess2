@@ -20,6 +20,7 @@ public class Chess {
 	private static boolean whiteTurn = true;
 	private static boolean computerVComputer = false;
 	private static boolean whiteIsComputer = false;
+	private static boolean gameHasEnded = false;
 
 	private static void processArgs(String[] args) {
 		for(String argument: args) {
@@ -87,7 +88,12 @@ public class Chess {
 		msg = p.getName() + " has won the game!";
 		DebugLog.println(msg);
 		display.stopComputerMovement();
+		gameHasEnded = true;
 		new Dialog(msg, true);
+	}
+
+	public static boolean getGameHasEnded() {
+		return gameHasEnded;
 	}
 
 	private static void togglePlayerText(Player player) {

@@ -37,31 +37,32 @@ public class GraphicalDisplay extends JFrame implements Display {
 
     private class ButtonHandler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            DebugLog.println("ButtonHandler event: " + e);
-            // Get the x and y coordinates of the button clicked
-            ChessButton source = (ChessButton)e.getSource();
-            int x = source.getXValue();
-            int y = source.getYValue();
+            if (!Chess.getGameHasEnded()) {
+                DebugLog.println("ButtonHandler event: " + e);
+                // Get the x and y coordinates of the button clicked
+                ChessButton source = (ChessButton) e.getSource();
+                int x = source.getXValue();
+                int y = source.getYValue();
 
-            source.setBackground(Color.lightGray);
-            source.setBorderPainted(false);
-            source.setOpaque(true);
+                source.setBackground(Color.lightGray);
+                source.setBorderPainted(false);
+                source.setOpaque(true);
 
-            DebugLog.println("Button clicked: " + x + "," + y);
-            // Toggle users state of clicking
-            toggleState(x, y);
-            // Player has clicked end position, attempt to make move
-            if (currentState == ClickState.CLICK_END) {
-                DebugLog.println("Click sequence.");
+                DebugLog.println("Button clicked: " + x + "," + y);
+                // Toggle users state of clicking
+                toggleState(x, y);
+                // Player has clicked end position, attempt to make move
+                if (currentState == ClickState.CLICK_END) {
+                    DebugLog.println("Click sequence.");
 
-                // Deselect if user presses same square twice
-                if (startX == endX && startY == endY) {
-                    resetMarkings();
+                    // Deselect if user presses same square twice
+                    if (startX == endX && startY == endY) {
+                        resetMarkings();
+                    } else {
+                        Chess.makeMove(startX, startY, endX, endY);
+                    }
+                    resetState();
                 }
-                else{
-                    Chess.makeMove(startX, startY, endX, endY);
-                }
-                resetState();
             }
         }
     }
